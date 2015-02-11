@@ -1,0 +1,15 @@
+{
+  "name": "osp-search",
+  "version": "0.0.0",
+  "description": "A basic search interface onto the OSP citation data.",
+  "author": "David McClure <davidwilliammcclure@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "coffee-script": "^1.9.0",
+    "connect-livereload": "^0.5.2",
+    "cors": "^2.5.3",
+    "debug": "^2.1.1",
+    "express": "^4.11.2",
+    "jade": "^1.9.2"
+  }
+}
