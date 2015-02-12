@@ -1,0 +1,40 @@
+---
+
+- name: Provision the plugin instance
+  hosts: localhost
+  gather_facts: False
+  sudo_user: ubuntu
+
+  vars_files:
+    - vars/ec2.yml
+
+  tasks:
+
+    - name: Start the instance
+      register: servers
+      ec2:
+
+        image: '{{ ec2_image }}'
+        instance_type: '{{ ec2_instance_type }}'
+        vpc_subnet_id: '{{ ec2_subnet_id }}'
+        group: osp-worker
+        region: '{{ ec2_region }}'
+        assign_public_ip: yes
+        keypair: '{{ ec2_keypair }}'
+        wait: yes
+
+        exact_count: 1
+        instance_tags:
+          Name: osp-search
+          osp: search
+        count_tag:
+          osp: search
+
+    - name: Attach the OSP volume
+      ec2_vol:
+        instance: '{{ item.id }}'
+        snapshot: '{{ ec2_osp_snapshot }}'
+        region: '{{ ec2_region }}'
+        volume_size: 1 # Unused, Ansible bug workaround.
+      with_flattened:
+        - servers.instances
