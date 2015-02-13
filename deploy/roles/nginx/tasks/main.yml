@@ -5,3 +5,17 @@
     pkg: nginx
     update_cache: yes
     state: latest
+
+- name: Apply SSL certificate
+  template:
+    src: '{{ item }}.j2'
+    dest: /etc/nginx/{{ item }}
+  with_items:
+    - cert.crt
+    - cert.key
+
+- name: Apply nginx configurations
+  notify: restart nginx
+  template:
+    src: default.j2
+    dest: /etc/nginx/sites-enabled/default
