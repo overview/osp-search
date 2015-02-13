@@ -1,6 +1,6 @@
 ---
 
-- name: Configure plugin
+- name: Configure the server
   sudo: yes
   hosts:
     - tag_osp_search

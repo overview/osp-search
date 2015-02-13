@@ -1,0 +1,27 @@
+---
+
+- name: Deploy the plugin
+  register: code
+  git:
+    repo: '{{ plugin_repo }}'
+    dest: '{{ plugin_src }}'
+
+- name: NPM install
+  command: npm install
+  when: code.changed
+  args:
+    chdir: "{{ plugin_src }}"
+
+- name: Build the application
+  command: grunt compile:min
+  when: code.changed
+  args:
+    chdir: "{{ plugin_src }}"
+
+- name: Start the app
+  command: pm2 startOrReload app.json
+  args:
+    chdir: "{{ plugin_src }}"
+  environment:
+    PORT: "{{ plugin_port }}"
+    NODE_ENV: "{{ plugin_env }}"

@@ -1,0 +1,9 @@
+---
+
+- name: Deploy the plugin
+  sudo: yes
+  hosts:
+    - tag_osp_search
+
+  roles:
+    - plugin

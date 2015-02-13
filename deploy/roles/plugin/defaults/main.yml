@@ -1,0 +1,7 @@
+---
+
+plugin_repo: https://github.com/overview/osp-search.git
+plugin_branch: master
+plugin_src: /home/{{ ansible_ssh_user }}/osp-search
+plugin_port: 3001
+plugin_env: production
