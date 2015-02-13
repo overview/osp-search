@@ -1,0 +1,13 @@
+---
+
+- name: Configure plugin
+  sudo: yes
+  hosts:
+    - tag_osp_search
+
+  vars_files:
+    - vars/elasticsearch.yml
+
+  roles:
+    - common
+    - elasticsearch
