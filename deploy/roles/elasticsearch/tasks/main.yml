@@ -43,6 +43,6 @@
 - name: Apply the Elasticsearch configuration
   notify: restart elasticsearch
   template:
-    src: elasticsearch.yml.j2
+    src: elasticsearch.yml
     dest: /etc/elasticsearch/elasticsearch.yml
     mode: 0644
