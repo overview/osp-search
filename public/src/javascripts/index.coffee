@@ -7,5 +7,5 @@ client = new es.Client(
   host: 'localhost:9200'
 )
 
-client.ping (err) ->
+client.ping {requestTimeout: 1000}, (err) ->
   console.log(err)
