@@ -34,9 +34,15 @@
     mode: 0700
     recurse: yes
 
-- name: Apply the configuration
-  notify: restart elasticsearch
+- name: Apply the service configuration
   template:
     src: elasticsearch.j2
     dest: /etc/default/elasticsearch
+    mode: 0644
+
+- name: Apply the Elasticsearch configuration
+  notify: restart elasticsearch
+  template:
+    src: elasticsearch.yml.j2
+    dest: /etc/elasticsearch/elasticsearch.yml
     mode: 0644

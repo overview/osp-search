@@ -16,3 +16,4 @@
     global: yes
   with_items:
     - pm2
+    - grunt-cli
