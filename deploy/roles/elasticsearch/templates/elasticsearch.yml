@@ -1,3 +1,4 @@
 
 http.cors.enabled: true
 http.cors.allow-methods: GET
+http.port: 9201
