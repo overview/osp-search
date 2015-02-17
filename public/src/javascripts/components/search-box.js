@@ -1,18 +1,21 @@
 
 
 var React = require('react');
-var SearchBox = require('./search-box');
 
 
 module.exports = React.createClass({
 
 
   /**
-   * Render the top-level application structure.
+   * Render the search box.
    */
   render: function() {
     return (
-      <SearchBox />
+      <input
+        className="form-control"
+        type="text"
+        placeholder="Search texts"
+      />
     );
   }
 
