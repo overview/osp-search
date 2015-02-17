@@ -15,8 +15,17 @@ module.exports = React.createClass({
         className="form-control"
         type="text"
         placeholder="Search texts"
+        onChange={this.onChange}
       />
     );
+  },
+
+
+  /**
+   * When the search query is changed.
+   */
+  onChange: function(event) {
+    console.log(event.target.value);
   }
 
 
