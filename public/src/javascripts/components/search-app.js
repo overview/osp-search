@@ -12,7 +12,18 @@ module.exports = React.createClass({
    */
   render: function() {
     return (
-      <SearchBox />
+      <div className="container">
+
+        <div className="page-header">
+          <h2>
+            <span>Open Syllabus Project</span>&nbsp;
+            <small>Harvard Open Metadata</small>
+          </h2>
+        </div>
+
+        <SearchBox />
+
+      </div>
     );
   }
 
