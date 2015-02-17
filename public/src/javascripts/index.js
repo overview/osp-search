@@ -1,4 +1,10 @@
 
 
 var React = require('react');
-console.log('test');
+var SearchApp = require('./components/search-app.js');
+
+
+React.render(
+  <SearchApp />,
+  document.getElementById('search')
+);

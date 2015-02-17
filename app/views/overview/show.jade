@@ -1,5 +1,9 @@
 
-extends layout
+extends ../layout
+
+block head
+  link(rel='stylesheet', href='/dist/style.css')
 
 block content
   #search
+  script(src='/dist/script.js')

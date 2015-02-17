@@ -31,6 +31,7 @@
     "jadeify": "^4.0.1",
     "jit-grunt": "^0.9.1",
     "load-grunt-config": "^0.16.0",
+    "reactify": "^1.0.0",
     "time-grunt": "^1.0.0"
   }
 }
