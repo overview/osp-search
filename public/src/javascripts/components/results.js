@@ -31,7 +31,10 @@ module.exports = React.createClass({
 
     var texts = _.map(this.state.texts.hits, function(t) {
       return (
-        <li>{t._source.title}</li>
+        <li>
+          <div>{t._source.title}</div>
+          <div>{t._source.author}</div>
+        </li>
       );
     });
 

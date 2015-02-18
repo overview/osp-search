@@ -45,7 +45,7 @@ module.exports = Fluxxor.createStore({
       query = {
         multi_match: {
           query: qs,
-          fields: ['title', 'body'],
+          fields: ['title', 'author'],
           type: 'best_fields'
         }
       };
