@@ -14,7 +14,7 @@ module.exports = React.createClass({
    * On startup, execute the empty query.
    */
   componentDidMount: function() {
-    this.getFlux().actions.query('')
+    this.getFlux().actions.query('*')
   },
 
 
@@ -37,7 +37,15 @@ module.exports = React.createClass({
    * When the search query is changed.
    */
   onChange: function(event) {
-    this.getFlux().actions.query(event.target.value)
+
+    // If the box is empty, match all texts.
+    var query =
+      event.target.value ?
+      event.target.value :
+      '*';
+
+    this.getFlux().actions.query(query)
+
   }
 
 
