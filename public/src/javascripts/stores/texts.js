@@ -67,7 +67,19 @@ module.exports = Fluxxor.createStore({
         sort: [
           { count: { order: 'desc' }},
           '_score'
-        ]
+        ],
+        highlight: {
+          fields: {
+            title: {
+              number_of_fragments: 1,
+              fragment_size: 1000
+            },
+            author: {
+              number_of_fragments: 1,
+              fragment_size: 1000
+            }
+          }
+        }
       }
     })
 
