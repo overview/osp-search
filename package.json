@@ -14,7 +14,7 @@
     "express": "^4.11.2",
     "fluxxor": "^1.5.2",
     "jade": "^1.9.2",
-    "lodash": "^3.1.0",
+    "lodash": "^3.2.0",
     "react": "^0.12.2"
   },
   "devDependencies": {
