@@ -33,24 +33,39 @@ module.exports = Fluxxor.createStore({
   /**
    * Execute a search query.
    *
-   * @param {String} query - The query string.
+   * @param {String} qs - The query string.
    */
-  onQuery: function(query) {
+  onQuery: function(qs) {
 
     var store = this;
+    var query;
+
+    // If a query string is defined, search title and body.
+    if (!_.isNull(qs)) {
+      query = {
+        multi_match: {
+          query: qs,
+          fields: ['title', 'body'],
+          type: 'best_fields'
+        }
+      };
+    }
+
+    // Otherwise, load all documents.
+    else {
+      query = {
+        match_all: {}
+      };
+    }
 
     this.client.search({
       index: 'hlom',
       type: 'record',
       size: 100,
       body: {
-        query: {
-          query_string: {
-            query: query
-          }
-        },
+        query: query,
         sort: [
-          {count: {order: 'desc'}},
+          { count: { order: 'desc' }},
           '_score'
         ]
       }

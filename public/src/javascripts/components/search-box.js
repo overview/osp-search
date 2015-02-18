@@ -14,7 +14,7 @@ module.exports = React.createClass({
    * On startup, execute the empty query.
    */
   componentDidMount: function() {
-    this.getFlux().actions.query('*')
+    this.getFlux().actions.query(null)
   },
 
 
@@ -42,7 +42,7 @@ module.exports = React.createClass({
     var query =
       event.target.value ?
       event.target.value :
-      '*';
+      null;
 
     this.getFlux().actions.query(query)
 
