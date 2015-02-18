@@ -36,9 +36,10 @@ module.exports = React.createClass({
     });
 
     return (
-      <ul className="results">
-        {texts}
-      </ul>
+      <div className="results">
+        <h4>{this.state.texts.total} texts</h4>
+        <ul className="result-list">{texts}</ul>
+      </div>
     );
 
   }
