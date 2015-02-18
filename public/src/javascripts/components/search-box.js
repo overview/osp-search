@@ -1,9 +1,21 @@
 
 
+var Fluxxor = require('fluxxor');
 var React = require('react');
 
 
 module.exports = React.createClass({
+
+
+  mixins: [Fluxxor.FluxMixin(React)],
+
+
+  /**
+   * On startup, execute the empty query.
+   */
+  componentDidMount: function() {
+    this.getFlux().actions.query('')
+  },
 
 
   /**
@@ -25,7 +37,7 @@ module.exports = React.createClass({
    * When the search query is changed.
    */
   onChange: function(event) {
-    console.log(event.target.value);
+    this.getFlux().actions.query(event.target.value)
   }
 
 

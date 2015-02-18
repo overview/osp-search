@@ -1,10 +1,14 @@
 
 
+var Fluxxor = require('fluxxor');
 var React = require('react');
 var SearchBox = require('./search-box');
 
 
 module.exports = React.createClass({
+
+
+  mixins: [Fluxxor.FluxMixin(React)],
 
 
   /**
