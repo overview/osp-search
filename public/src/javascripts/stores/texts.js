@@ -57,7 +57,7 @@ module.exports = Fluxxor.createStore({
     })
 
     .then(function(res) {
-      store.hits = res.hits;
+      store.texts = res.hits;
       store.emit('change');
     })
 
