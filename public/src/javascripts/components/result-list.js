@@ -31,6 +31,9 @@ module.exports = React.createClass({
    */
   render: function() {
 
+    var total = Number(this.state.texts.total);
+
+    // Build up the list of result rows.
     var texts = _.map(this.state.texts.hits, function(t) {
       return <ResultRow hit={t} />;
     });
@@ -45,7 +48,7 @@ module.exports = React.createClass({
     return (
       <div className="results">
 
-        <h3>{this.state.texts.total} results:</h3>
+        <h3>{total.toLocaleString()} results:</h3>
 
         <table className={tableCx}>
           <thead>
