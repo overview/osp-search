@@ -4,6 +4,7 @@ var _ = require('lodash');
 require('underscore.haz')(_);
 var Fluxxor = require('fluxxor');
 var React = require('react');
+var ResultRow = require('./result-row');
 
 
 module.exports = React.createClass({
@@ -31,24 +32,7 @@ module.exports = React.createClass({
   render: function() {
 
     var texts = _.map(this.state.texts.hits, function(t) {
-
-      var title =
-        _.haz(t, 'highlight.title') ?
-        t.highlight.title[0] :
-        t._source.title;
-
-      var author =
-        _.haz(t, 'highlight.author') ?
-        t.highlight.author[0] :
-        t._source.author;
-
-      return (
-        <li>
-          <div dangerouslySetInnerHTML={{__html: title}}></div>
-          <div dangerouslySetInnerHTML={{__html: author}}></div>
-        </li>
-      );
-
+      return <ResultRow hit={t} />;
     });
 
     return (

@@ -2,8 +2,8 @@
 
 var Fluxxor = require('fluxxor');
 var React = require('react');
+var ResultList = require('./result-list');
 var SearchBox = require('./search-box');
-var Results = require('./results');
 
 
 module.exports = React.createClass({
@@ -27,7 +27,7 @@ module.exports = React.createClass({
         </div>
 
         <SearchBox />
-        <Results />
+        <ResultList />
 
       </div>
     );
