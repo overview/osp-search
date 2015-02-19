@@ -35,7 +35,7 @@ module.exports = React.createClass({
 
     // Build up the list of result rows.
     var texts = _.map(this.state.texts.hits, function(t) {
-      return <ResultRow hit={t} />;
+      return <ResultRow hit={t} key={t._id} />;
     });
 
     var tableCx = React.addons.classSet({
