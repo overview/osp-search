@@ -53,10 +53,10 @@ module.exports = React.createClass({
         <table className={tableCx}>
           <thead>
             <tr>
-              <th>Teaching Rank</th>
-              <th>Citation Count</th>
-              <th>Title</th>
-              <th>Author</th>
+              <th className="count">Citations</th>
+              <th className="rank">#</th>
+              <th className="title">Title</th>
+              <th className="author">Author</th>
             </tr>
           </thead>
           <tbody>

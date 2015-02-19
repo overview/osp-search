@@ -39,12 +39,12 @@ module.exports = React.createClass({
 
         <td
           className="count"
-          dangerouslySetInnerHTML={{__html: rank}}>
+          dangerouslySetInnerHTML={{__html: count}}>
         </td>
 
         <td
-          className="count"
-          dangerouslySetInnerHTML={{__html: count}}>
+          className="rank"
+          dangerouslySetInnerHTML={{__html: rank}}>
         </td>
 
         <td
