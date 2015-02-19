@@ -6,10 +6,10 @@ module.exports = {
   /**
    * Apply a new query string.
    *
-   * @param {String} q - The query from the search box.
+   * @param {Object} opts - The query options.
    */
-  query: function(q) {
-    this.dispatch('QUERY', q);
+  query: function(opts) {
+    this.dispatch('QUERY', opts);
   }
 
 

@@ -33,18 +33,21 @@ module.exports = Fluxxor.createStore({
   /**
    * Execute a search query.
    *
-   * @param {String} qs - The query string.
+   * @param {String} opts - Query options.
    */
-  onQuery: function(qs) {
+  onQuery: function(opts) {
 
     var store = this;
-    var query;
+
+    // Merge custom options.
+    var defOpts = { qs: null, from: 0 };
+    opts = _.merge(defOpts, opts);
 
     // If a query string is defined, search title and body.
-    if (!_.isNull(qs)) {
-      query = {
+    if (!_.isNull(opts.qs)) {
+      var query = {
         multi_match: {
-          query: qs,
+          query: opts.qs,
           fields: ['title', 'author'],
           type: 'best_fields'
         }
@@ -53,7 +56,7 @@ module.exports = Fluxxor.createStore({
 
     // Otherwise, load all documents.
     else {
-      query = {
+      var query = {
         match_all: {}
       };
     }
@@ -62,6 +65,7 @@ module.exports = Fluxxor.createStore({
       index: 'hlom',
       type: 'record',
       size: 100,
+      from: opts.from,
       body: {
         query: query,
         sort: [
