@@ -20,8 +20,9 @@ module.exports = React.createClass({
 
     var hit = this.props.hit;
 
-    // Comma-ify the count.
+    // Format the integers.
     var count = Number(hit._source.count).toLocaleString();
+    var rank  = Number(hit._source.rank).toLocaleString();
 
     var title =
       _.haz(hit, 'highlight.title') ?
@@ -35,6 +36,11 @@ module.exports = React.createClass({
 
     return (
       <tr>
+
+        <td
+          className="rank"
+          dangerouslySetInnerHTML={{__html: rank}}>
+        </td>
 
         <td
           className="count"
