@@ -61,7 +61,7 @@ module.exports = Fluxxor.createStore({
     this.client.search({
       index: 'hlom',
       type: 'record',
-      size: 100,
+      size: 500,
       body: {
         query: query,
         sort: [

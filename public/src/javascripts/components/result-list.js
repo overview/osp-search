@@ -2,8 +2,8 @@
 
 var _ = require('lodash');
 require('underscore.haz')(_);
+var React = require('react/addons');
 var Fluxxor = require('fluxxor');
-var React = require('react');
 var ResultRow = require('./result-row');
 
 
@@ -35,10 +35,31 @@ module.exports = React.createClass({
       return <ResultRow hit={t} />;
     });
 
+    var tableCx = React.addons.classSet({
+      'table': true,
+      'table-striped': true,
+      'table-condensed': true,
+      'table-hover': true
+    });
+
     return (
       <div className="results">
-        <h4>{this.state.texts.total} texts</h4>
-        <ul className="result-list">{texts}</ul>
+
+        <h3>{this.state.texts.total} results:</h3>
+
+        <table className={tableCx}>
+          <thead>
+            <tr>
+              <th></th>
+              <th>Title</th>
+              <th>Author</th>
+            </tr>
+          </thead>
+          <tbody>
+            {texts}
+          </tbody>
+        </table>
+
       </div>
     );
 

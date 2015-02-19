@@ -31,19 +31,24 @@ module.exports = React.createClass({
       hit._source.author;
 
     return (
-      <li>
+      <tr>
 
-        <span
+        <td
+          className="count"
+          dangerouslySetInnerHTML={{__html: hit._source.count}}>
+        </td>
+
+        <td
           className="title"
           dangerouslySetInnerHTML={{__html: title}}>
-        </span>
+        </td>
 
-        <span
+        <td
           className="author"
           dangerouslySetInnerHTML={{__html: author}}>
-        </span>
+        </td>
 
-      </li>
+      </tr>
     );
 
   }
