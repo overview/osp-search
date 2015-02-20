@@ -36,62 +36,7 @@ module.exports = Fluxxor.createStore({
    * @param {String} opts - Query options.
    */
   onQuery: function(opts) {
-
     var store = this;
-
-    // Merge custom options.
-    var defOpts = { qs: null, from: 0 };
-    opts = _.merge(defOpts, opts);
-
-    // If a query string is defined, search title and body.
-    if (!_.isNull(opts.qs)) {
-      var query = {
-        multi_match: {
-          query: opts.qs,
-          fields: ['title', 'author'],
-          type: 'best_fields'
-        }
-      };
-    }
-
-    // Otherwise, load all documents.
-    else {
-      var query = {
-        match_all: {}
-      };
-    }
-
-    this.client.search({
-      index: 'hlom',
-      type: 'record',
-      size: 500,
-      from: opts.from,
-      body: {
-        query: query,
-        sort: [
-          { count: { order: 'desc' }},
-          '_score'
-        ],
-        highlight: {
-          fields: {
-            title: {
-              number_of_fragments: 1,
-              fragment_size: 1000
-            },
-            author: {
-              number_of_fragments: 1,
-              fragment_size: 1000
-            }
-          }
-        }
-      }
-    })
-
-    .then(function(res) {
-      store.texts = res.hits;
-      store.emit('change');
-    });
-
   }
 
 
