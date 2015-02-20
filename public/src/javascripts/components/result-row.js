@@ -35,7 +35,9 @@ module.exports = React.createClass({
       hit._source.author;
 
     return (
-      <tr className="text">
+      <tr
+        className="text"
+        onClick={this.onClick}>
 
         <td
           className="count"
@@ -60,6 +62,15 @@ module.exports = React.createClass({
       </tr>
     );
 
+  },
+
+
+  /**
+   * When a text row is clicked.
+   */
+  onClick: function() {
+    var id = this.props.hit._source.stored_id;
+    this.getFlux().actions.select(id);
   }
 
 
