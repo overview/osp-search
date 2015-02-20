@@ -21,6 +21,7 @@ module.exports = React.createClass({
 
         <div className="page-header">
           <h2>
+            <img src="/src/images/osp.jpg" />
             <span>Open Syllabus Project</span>&nbsp;
             <small>Harvard Open Metadata</small>
           </h2>
