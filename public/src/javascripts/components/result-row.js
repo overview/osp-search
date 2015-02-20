@@ -93,10 +93,13 @@ module.exports = React.createClass({
    * @param {String} field - The field key.
    */
   _getHighlight: function(field) {
+
     var path = 'highlight.'+field
+
     return _.haz(this.props.hit, path) ?
       this.props.hit.highlight[field][0] :
       this.props.hit._source[field];
+
   }
 
 

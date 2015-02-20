@@ -38,7 +38,7 @@ module.exports = Fluxxor.createStore({
     var msg = {
       call: 'setDocumentListParams',
       args: [{
-        objects: opts.id,
+        objects: String(opts.id),
         name: 'assign "'+opts.title+'"'
       }]
     };
