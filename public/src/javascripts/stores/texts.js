@@ -1,8 +1,8 @@
 
 
+var $ = require('jquery');
 var _ = require('lodash');
 var Fluxxor = require('fluxxor');
-var es = require('elasticsearch');
 
 
 module.exports = Fluxxor.createStore({
@@ -20,10 +20,6 @@ module.exports = Fluxxor.createStore({
 
     this.texts = [];
 
-    this.client = new es.Client({
-      host: 'localhost:9201' // TODO: envify.
-    });
-
     // Debounce the query handler.
     this.onQuery = _.debounce(this.onQuery, 200);
 
@@ -36,7 +32,19 @@ module.exports = Fluxxor.createStore({
    * @param {String} opts - Query options.
    */
   onQuery: function(opts) {
+
     var store = this;
+
+    $.ajax({
+      dataType: 'json',
+      url: 'http://localhost:3000/query', // TODO: envify.
+      data: opts,
+      success: function(res) {
+        store.texts = res.hits;
+        store.emit('change');
+      }
+    });
+
   }
 
 

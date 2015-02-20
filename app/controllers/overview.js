@@ -1,7 +1,7 @@
 
 
 var _ = require('lodash');
-var elasticsearch = require('elasticsearch');
+var es = require('elasticsearch');
 
 
 /**
@@ -30,10 +30,10 @@ exports.query = function(req, res) {
   });
 
   // If a query string is defined, search title and author.
-  if (_.isNull(req.qs)) {
+  if (!_.isEmpty(req.query.qs)) {
     var query = {
       multi_match: {
-        query: opts.qs,
+        query: req.query.qs,
         fields: ['title', 'author'],
         type: 'best_fields'
       }
@@ -72,8 +72,8 @@ exports.query = function(req, res) {
     }
   })
 
-  .then(function(res) {
-    console.log(res);
+  .then(function(result) {
+    res.send(result);
   });
 
 };
