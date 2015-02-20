@@ -20,5 +20,6 @@ exports.show = function(req, res) {
  * Run a search query.
  */
 exports.query = function(req, res) {
+  res.send('test');
   // TODO
 };
