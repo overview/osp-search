@@ -44,9 +44,7 @@ module.exports = React.createClass({
       event.target.value :
       null;
 
-    this.getFlux().actions.query({
-      qs: query
-    });
+    this.getFlux().actions.query(query);
 
   }
 

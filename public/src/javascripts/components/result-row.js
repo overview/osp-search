@@ -35,7 +35,7 @@ module.exports = React.createClass({
       hit._source.author;
 
     return (
-      <tr>
+      <tr className="text">
 
         <td
           className="count"
