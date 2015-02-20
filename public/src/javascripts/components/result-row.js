@@ -35,19 +35,24 @@ module.exports = React.createClass({
     var count = Number(hit._source.count).toLocaleString();
     var rank  = Number(hit._source.rank).toLocaleString();
 
+    // Hit-highlight "title".
     var title =
       _.haz(hit, 'highlight.title') ?
       hit.highlight.title[0] :
       hit._source.title;
 
+    // Hit-highlight "author".
     var author =
       _.haz(hit, 'highlight.author') ?
       hit.highlight.author[0] :
       hit._source.author;
 
+    // Is the row currently selected?
+    this.selected = this.state.selected == hit._source.stored_id;
+
     var trCx = React.addons.classSet({
       'text': true,
-      'success': this.state.selected==hit._source.stored_id
+      'success': this.selected
     });
 
     return (
@@ -86,11 +91,11 @@ module.exports = React.createClass({
    */
   onClick: function() {
 
-    // Get the Overview ID and HLOM title.
-    var id    = this.props.hit._source.stored_id;
-    var title = this.props.hit._source.title;
-
-    this.getFlux().actions.select(id, title);
+    // Apply the new selection.
+    this.getFlux().actions.select(
+      this.props.hit._source.stored_id,
+      this.props.hit._source.title
+    );
 
   }
 
