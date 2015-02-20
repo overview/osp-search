@@ -37,7 +37,7 @@ module.exports = Fluxxor.createStore({
 
     $.ajax({
       dataType: 'json',
-      url: 'http://localhost:3000/query', // TODO: envify.
+      url: '/query',
       data: opts,
       success: function(res) {
         store.texts = res.hits;
