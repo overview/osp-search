@@ -69,8 +69,13 @@ module.exports = React.createClass({
    * When a text row is clicked.
    */
   onClick: function() {
+
+    // Get the Overview ID and HLOM title.
     var id = this.props.hit._source.stored_id;
-    this.getFlux().actions.select(id);
+    var title = this.props.hit._source.title;
+
+    this.getFlux().actions.select(id, title);
+
   }
 
 

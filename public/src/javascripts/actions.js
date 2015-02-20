@@ -10,7 +10,10 @@ module.exports = {
    * @param {Number} start - Start offset.
    */
   query: function(qs, start) {
-    this.dispatch('QUERY', { qs: qs, start: start });
+    this.dispatch('QUERY', {
+      qs: qs,
+      start: start
+    });
   },
 
 
@@ -18,9 +21,13 @@ module.exports = {
    * When a text is selected.
    *
    * @param {Number} id - The Overview id.
+   * @param {Number} title - The HLOM title.
    */
-  select: function(id) {
-    this.dispatch('SELECT', id);
+  select: function(id, title) {
+    this.dispatch('SELECT', {
+      id: id,
+      title: title
+    });
   }
 
 

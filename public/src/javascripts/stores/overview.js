@@ -26,13 +26,16 @@ module.exports = Fluxxor.createStore({
   /**
    * Filter documents by HLOM text.
    *
-   * @param {Number} id - The HLOM store object id.
+   * @param {Object} opts - Selection options.
    */
-  onSelect: function(id) {
+  onSelect: function(opts) {
 
     var msg = {
       call: 'setDocumentListParams',
-      args: [{ objects: id }]
+      args: [{
+        objects: opts.id,
+        name: 'assign "'+opts.title+'"'
+      }]
     };
 
     window.parent.postMessage(
