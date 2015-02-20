@@ -17,9 +17,14 @@ module.exports = Fluxxor.createStore({
    * Spin up the Elasticsearch client.
    */
   initialize: function() {
+
+    this.selected = null;
+
+    // Get server / API key from URL.
     this.params = QueryString.parse(
       window.location.search.substr(1)
     );
+
   },
 
 
@@ -41,6 +46,9 @@ module.exports = Fluxxor.createStore({
     window.parent.postMessage(
       msg, this.params.server
     );
+
+    this.selected = opts.id;
+    this.emit('change');
 
   }
 

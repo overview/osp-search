@@ -90,7 +90,7 @@ module.exports = Fluxxor.createStore({
     .then(function(res) {
       store.texts = res.hits;
       store.emit('change');
-    })
+    });
 
   }
 

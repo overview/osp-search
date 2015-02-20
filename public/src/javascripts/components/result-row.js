@@ -1,16 +1,27 @@
 
 
 var _ = require('lodash');
+var React = require('react/addons');
 var Fluxxor = require('fluxxor');
-var React = require('react');
 
 
 module.exports = React.createClass({
 
 
   mixins: [
-    Fluxxor.FluxMixin(React)
+    Fluxxor.FluxMixin(React),
+    Fluxxor.StoreWatchMixin('OverviewStore')
   ],
+
+
+  /**
+   * Get the current hits.
+   */
+  getStateFromFlux: function() {
+    return {
+      selected: this.getFlux().store('OverviewStore').selected
+    };
+  },
 
 
   /**
@@ -34,9 +45,14 @@ module.exports = React.createClass({
       hit.highlight.author[0] :
       hit._source.author;
 
+    var trCx = React.addons.classSet({
+      'text': true,
+      'success': this.state.selected==hit._source.stored_id
+    });
+
     return (
       <tr
-        className="text"
+        className={trCx}
         onClick={this.onClick}>
 
         <td
@@ -71,7 +87,7 @@ module.exports = React.createClass({
   onClick: function() {
 
     // Get the Overview ID and HLOM title.
-    var id = this.props.hit._source.stored_id;
+    var id    = this.props.hit._source.stored_id;
     var title = this.props.hit._source.title;
 
     this.getFlux().actions.select(id, title);
