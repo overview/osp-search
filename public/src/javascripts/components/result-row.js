@@ -31,21 +31,11 @@ module.exports = React.createClass({
 
     var hit = this.props.hit;
 
-    // Format the integers.
-    var count = Number(hit._source.count).toLocaleString();
-    var rank  = Number(hit._source.rank).toLocaleString();
-
-    // Hit-highlight "title".
-    var title =
-      _.haz(hit, 'highlight.title') ?
-      hit.highlight.title[0] :
-      hit._source.title;
-
-    // Hit-highlight "author".
-    var author =
-      _.haz(hit, 'highlight.author') ?
-      hit.highlight.author[0] :
-      hit._source.author;
+    // Format the fields.
+    var count   = Number(hit._source.count).toLocaleString();
+    var rank    = Number(hit._source.rank).toLocaleString();
+    var author  = this._getHighlight('author');
+    var title   = this._getHighlight('title');
 
     // Is the row currently selected?
     this.selected = this.state.selected == hit._source.stored_id;
@@ -90,13 +80,23 @@ module.exports = React.createClass({
    * When a text row is clicked.
    */
   onClick: function() {
-
-    // Apply the new selection.
     this.getFlux().actions.select(
       this.props.hit._source.stored_id,
       this.props.hit._source.title
     );
+  },
 
+
+  /**
+   * Return a field highlight, falling back on the raw field.
+   *
+   * @param {String} field - The field key.
+   */
+  _getHighlight: function(field) {
+    var path = 'highlight.'+field
+    return _.haz(this.props.hit, path) ?
+      this.props.hit.highlight[field][0] :
+      this.props.hit._source[field];
   }
 
 
