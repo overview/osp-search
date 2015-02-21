@@ -53,8 +53,9 @@ module.exports = React.createClass({
         <table className={tableCx}>
           <thead>
             <tr>
-              <th className="count">Citations</th>
-              <th className="rank">#</th>
+              <th className="count">Assignment Count</th>
+              <th className="rank">Assignment Percentile</th>
+              <th className="rank">Assignment Rank</th>
               <th className="title">Title</th>
               <th className="author">Author</th>
             </tr>

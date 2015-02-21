@@ -31,8 +31,9 @@ module.exports = React.createClass({
 
     var hit = this.props.hit;
 
-    // Format the fields.
+    // Format the field values.
     var count   = Number(hit._source.count).toLocaleString();
+    var percent = Number(hit._source.percentile).toLocaleString();
     var rank    = Number(hit._source.rank).toLocaleString();
     var author  = this._getHighlight('author');
     var title   = this._getHighlight('title');
@@ -53,6 +54,11 @@ module.exports = React.createClass({
         <td
           className="count"
           dangerouslySetInnerHTML={{__html: count}}>
+        </td>
+
+        <td
+          className="percentile"
+          dangerouslySetInnerHTML={{__html: percent+'%'}}>
         </td>
 
         <td
@@ -88,7 +94,8 @@ module.exports = React.createClass({
 
 
   /**
-   * Return a field highlight, falling back on the raw field.
+   * If a field is highlighted, get the highlighted value. If not, fall back
+   * on the raw field value..
    *
    * @param {String} field - The field key.
    */
