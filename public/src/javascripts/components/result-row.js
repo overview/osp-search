@@ -29,21 +29,13 @@ module.exports = React.createClass({
    */
   render: function() {
 
-    var hit = this.props.hit;
-
-    // Format the field values.
-    var count   = Number(hit._source.count).toLocaleString();
-    var percent = Number(hit._source.percentile).toLocaleString();
-    var rank    = Number(hit._source.rank).toLocaleString();
-    var author  = this._getHighlight('author');
-    var title   = this._getHighlight('title');
-
     // Is the row currently selected?
-    this.selected = this.state.selected == hit._source.stored_id;
+    var id = this.props.hit._source.stored_id;
+    var selected = (this.state.selected == id);
 
     var trCx = React.addons.classSet({
       'text': true,
-      'success': this.selected
+      'success': selected
     });
 
     return (
@@ -53,27 +45,27 @@ module.exports = React.createClass({
 
         <td
           className="count"
-          dangerouslySetInnerHTML={{__html: count}}>
+          dangerouslySetInnerHTML={{__html: this._count()}}>
         </td>
 
         <td
           className="percentile"
-          dangerouslySetInnerHTML={{__html: percent+'%'}}>
+          dangerouslySetInnerHTML={{__html: this._percentile()}}>
         </td>
 
         <td
           className="rank"
-          dangerouslySetInnerHTML={{__html: rank}}>
+          dangerouslySetInnerHTML={{__html: this._rank()}}>
         </td>
 
         <td
           className="title"
-          dangerouslySetInnerHTML={{__html: title}}>
+          dangerouslySetInnerHTML={{__html: this._title()}}>
         </td>
 
         <td
           className="author"
-          dangerouslySetInnerHTML={{__html: author}}>
+          dangerouslySetInnerHTML={{__html: this._author()}}>
         </td>
 
       </tr>
@@ -107,7 +99,50 @@ module.exports = React.createClass({
       this.props.hit.highlight[field][0] :
       this.props.hit._source[field];
 
-  }
+  },
+
+
+  /**
+   * Title field.
+   */
+  _title: function() {
+    return this._getHighlight('title');
+  },
+
+
+  /**
+   * Author field.
+   */
+  _author: function() {
+    return this._getHighlight('author');
+  },
+
+
+  /**
+   * Assignment count field.
+   */
+  _count: function() {
+    var count = this.props.hit._source.count;
+    return Number(count).toLocaleString();
+  },
+
+
+  /**
+   * Assignment percentile field.
+   */
+  _percentile: function() {
+    var percentile = this.props.hit._source.percentile;
+    return Number(percentile).toFixed(2)+'%';
+  },
+
+
+  /**
+   * Assignment rank field.
+   */
+  _rank: function() {
+    var rank = this.props.hit._source.rank;
+    return Number(rank).toLocaleString();
+  },
 
 
 });
