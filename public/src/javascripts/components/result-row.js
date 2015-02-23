@@ -39,12 +39,17 @@ module.exports = React.createClass({
       'success': selected
     });
 
-    return (
-      <tr
-        className={trCx}
-        onClick={this.onClick}>
+    var colorStyle = {
+      color: this._color()
+    };
 
-        <td className="percentile">{this._percentile()}</td>
+    return (
+      <tr className={trCx} onClick={this.onClick}>
+
+        <td style={colorStyle} className="percentile">
+          {this._percentile()}
+        </td>
+
         <td className="rank">{this._rank()}</td>
         <td className="count">{this._count()}</td>
 
@@ -151,6 +156,16 @@ module.exports = React.createClass({
   _rank: function() {
     var rank = this.props.hit._source.rank;
     return Number(rank).toLocaleString();
+  },
+
+
+  /**
+   * Get a green -> red color, based on percentile.
+   */
+  _color: function() {
+    var scale = chroma.scale(['red', 'green']).mode('lab');
+    var ratio = Number(this.props.hit._source.percentile)/100;
+    return scale(ratio).hex()
   }
 
 
