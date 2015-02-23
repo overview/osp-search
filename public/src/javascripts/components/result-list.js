@@ -38,32 +38,51 @@ module.exports = React.createClass({
       return <ResultRow hit={t} key={t._id} />;
     });
 
-    var tableCx = React.addons.classSet({
-      'table': true,
-      'table-striped': true,
-      'table-condensed': true,
-      'table-hover': true
-    });
+    // Spinner.
+    if (_.isEmpty(texts)) {
 
-    return (
-      <div className="results">
+      var spinnerCx = React.addons.classSet({
+        'fa': true,
+        'fa-spin': true,
+        'fa-circle-o-notch': true,
+        'spinner': true
+      });
 
-        <h3>{total.toLocaleString()} results:</h3>
+      return <i className={spinnerCx}></i>
 
-        <table className={tableCx}>
-          <thead>
-            <th>Percentile</th>
-            <th>Rank</th>
-            <th>Count</th>
-            <th></th>
-          </thead>
-          <tbody>
-            {texts}
-          </tbody>
-        </table>
+    }
 
-      </div>
-    );
+    // Results.
+    else {
+
+      var tableCx = React.addons.classSet({
+        'table': true,
+        'table-striped': true,
+        'table-condensed': true,
+        'table-hover': true
+      });
+
+      return (
+        <div className="results">
+
+          <h3>{total.toLocaleString()} results:</h3>
+
+          <table className={tableCx}>
+            <thead>
+              <th>Percentile</th>
+              <th>Rank</th>
+              <th>Count</th>
+              <th></th>
+            </thead>
+            <tbody>
+              {texts}
+            </tbody>
+          </table>
+
+        </div>
+      );
+
+    }
 
   }
 
