@@ -12,6 +12,12 @@
     color: @brand-primary;
   }
 
+  th {
+    font-size: 10px;
+    text-transform: uppercase;
+    text-align: center;
+  }
+
   tr.text {
     cursor: pointer;
   }
@@ -20,16 +26,10 @@
     font-weight: bold;
   }
 
-  td.metrics {
-
+  td.percentile, td.rank, td.count {
     width: 1%;
-    text-align: right;
+    text-align: center;
     font-size: 18px;
-
-    span {
-      margin-left: 10px;
-    }
-
   }
 
   span.rank {
@@ -43,6 +43,7 @@
   }
 
   div.title {
+    font-size: 18px;
     font-weight: 500;
   }
 

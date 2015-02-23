@@ -43,9 +43,16 @@ module.exports = React.createClass({
         className={trCx}
         onClick={this.onClick}>
 
-        <td className="metrics">
+        <td className="percentile">
           <span className="percentile">{this._percentile()}</span>
+        </td>
+
+        <td className="rank">
           <span className="rank">{this._rank()}</span>
+        </td>
+
+        <td className="count">
+          <span className="count">{this._count()}</span>
         </td>
 
         <td className="text">
