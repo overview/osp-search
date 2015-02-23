@@ -3,6 +3,7 @@
 var _ = require('lodash');
 var React = require('react/addons');
 var Fluxxor = require('fluxxor');
+var chroma = require('chroma-js');
 
 
 module.exports = React.createClass({
@@ -43,17 +44,9 @@ module.exports = React.createClass({
         className={trCx}
         onClick={this.onClick}>
 
-        <td className="percentile">
-          <span className="percentile">{this._percentile()}</span>
-        </td>
-
-        <td className="rank">
-          <span className="rank">{this._rank()}</span>
-        </td>
-
-        <td className="count">
-          <span className="count">{this._count()}</span>
-        </td>
+        <td className="percentile">{this._percentile()}</td>
+        <td className="rank">{this._rank()}</td>
+        <td className="count">{this._count()}</td>
 
         <td className="text">
           <div className="header">
