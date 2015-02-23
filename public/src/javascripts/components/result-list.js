@@ -31,15 +31,8 @@ module.exports = React.createClass({
    */
   render: function() {
 
-    var total = Number(this.state.texts.total);
-
-    // Build up the list of result rows.
-    var texts = _.map(this.state.texts.hits, function(t) {
-      return <ResultRow hit={t} key={t._id} />;
-    });
-
-    // Spinner.
-    if (_.isEmpty(texts)) {
+    // Loading spinner.
+    if (_.isEmpty(this.state.texts)) {
 
       var spinnerCx = React.addons.classSet({
         'fa': true,
@@ -52,8 +45,20 @@ module.exports = React.createClass({
 
     }
 
-    // Results.
+    // Get the result count.
+    var total = Number(this.state.texts.total);
+
+    // No results.
+    if (total == 0) {
+      return <h3>No results</h3>
+    }
+
     else {
+
+      // Build up the list of result rows.
+      var texts = _.map(this.state.texts.hits, function(t) {
+        return <ResultRow hit={t} key={t._id} />;
+      });
 
       var tableCx = React.addons.classSet({
         'table': true,
