@@ -34,7 +34,7 @@ exports.query = function(req, res) {
     var query = {
       multi_match: {
         query: req.query.qs,
-        fields: ['title', 'author'],
+        fields: ['title', 'author', 'publisher'],
         type: 'best_fields'
       }
     };
@@ -64,6 +64,10 @@ exports.query = function(req, res) {
             fragment_size: 1000
           },
           author: {
+            number_of_fragments: 1,
+            fragment_size: 1000
+          },
+          publisher: {
             number_of_fragments: 1,
             fragment_size: 1000
           }
