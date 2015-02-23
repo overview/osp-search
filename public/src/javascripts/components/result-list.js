@@ -1,10 +1,16 @@
 
 
 var _ = require('lodash');
+var $ = require('jquery');
 require('underscore.haz')(_);
 var React = require('react/addons');
 var Fluxxor = require('fluxxor');
 var ResultRow = require('./result-row');
+
+// TODO: Fix.
+window.jQuery = $;
+window._ = _;
+require('floatthead');
 
 
 module.exports = React.createClass({
@@ -23,6 +29,15 @@ module.exports = React.createClass({
     return {
       texts: this.getFlux().store('TextStore').texts
     };
+  },
+
+
+  /**
+   * Initialize the sticky header.
+   */
+  componentDidUpdate: function() {
+    var table = $(this.getDOMNode()).find('table');
+    table.floatThead();
   },
 
 
