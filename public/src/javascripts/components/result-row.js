@@ -43,29 +43,30 @@ module.exports = React.createClass({
         className={trCx}
         onClick={this.onClick}>
 
-        <td
-          className="count"
-          dangerouslySetInnerHTML={{__html: this._count()}}>
+        <td className="metrics">
+          <span className="percentile">{this._percentile()}</span>
+          <span className="rank">{this._rank()}</span>
         </td>
 
-        <td
-          className="percentile"
-          dangerouslySetInnerHTML={{__html: this._percentile()}}>
-        </td>
+        <td className="text">
+          <div className="header">
 
-        <td
-          className="rank"
-          dangerouslySetInnerHTML={{__html: this._rank()}}>
-        </td>
+            <div
+              className="title"
+              dangerouslySetInnerHTML={{__html: this._title()}}>
+            </div>
 
-        <td
-          className="title"
-          dangerouslySetInnerHTML={{__html: this._title()}}>
-        </td>
+            <div
+              className="author"
+              dangerouslySetInnerHTML={{__html: this._author()}}>
+            </div>
 
-        <td
-          className="author"
-          dangerouslySetInnerHTML={{__html: this._author()}}>
+            <div
+              className="publisher"
+              dangerouslySetInnerHTML={{__html: this._publisher()}}>
+            </div>
+
+          </div>
         </td>
 
       </tr>
@@ -87,7 +88,7 @@ module.exports = React.createClass({
 
   /**
    * If a field is highlighted, get the highlighted value. If not, fall back
-   * on the raw field value..
+   * on the raw field value.
    *
    * @param {String} field - The field key.
    */
@@ -119,6 +120,14 @@ module.exports = React.createClass({
 
 
   /**
+   * Publisher field.
+   */
+  _publisher: function() {
+    return this._getHighlight('publisher');
+  },
+
+
+  /**
    * Assignment count field.
    */
   _count: function() {
@@ -142,7 +151,7 @@ module.exports = React.createClass({
   _rank: function() {
     var rank = this.props.hit._source.rank;
     return Number(rank).toLocaleString();
-  },
+  }
 
 
 });

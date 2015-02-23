@@ -51,15 +51,6 @@ module.exports = React.createClass({
         <h3>{total.toLocaleString()} results:</h3>
 
         <table className={tableCx}>
-          <thead>
-            <tr>
-              <th className="count">Assignment Count</th>
-              <th className="rank">Assignment Percentile</th>
-              <th className="rank">Assignment Rank</th>
-              <th className="title">Title</th>
-              <th className="author">Author</th>
-            </tr>
-          </thead>
           <tbody>
             {texts}
           </tbody>
