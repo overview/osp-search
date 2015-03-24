@@ -13,16 +13,6 @@ module.exports = React.createClass({
 
 
   /**
-   * Get the current hits.
-   */
-  //getStateFromFlux: function() {
-    //return {
-      //selected: this.getFlux().store('OverviewStore').selected
-    //};
-  //},
-
-
-  /**
    * Render an individual text.
    */
   render: function() {
@@ -69,17 +59,6 @@ module.exports = React.createClass({
 
 
   /**
-   * When a text row is clicked.
-   */
-  //onClick: function() {
-    //this.getFlux().actions.select(
-      //this.props.hit._source.stored_id,
-      //this.props.hit._source.title
-    //);
-  //},
-
-
-  /**
    * If a field is highlighted, get the highlighted value. If not, fall back
    * on the raw field value.
    *
@@ -97,10 +76,12 @@ module.exports = React.createClass({
 
 
   /**
-   * Title field.
+   * Get a green -> red color, based on percentile.
    */
-  _title: function() {
-    return this._getHighlight('title');
+  _color: function() {
+    var scale = chroma.scale(['red', 'green']).mode('lab');
+    var ratio = Number(this.props.hit._source.percent)/100;
+    return scale(ratio).hex()
   },
 
 
@@ -109,6 +90,14 @@ module.exports = React.createClass({
    */
   _author: function() {
     return this._getHighlight('author');
+  },
+
+
+  /**
+   * Title field.
+   */
+  _title: function() {
+    return this._getHighlight('title');
   },
 
 
@@ -130,7 +119,7 @@ module.exports = React.createClass({
 
 
   /**
-   * Assignment percentile field.
+   * Teaching percentile field.
    */
   _percentile: function() {
     var percentile = this.props.hit._source.percent;
@@ -139,21 +128,11 @@ module.exports = React.createClass({
 
 
   /**
-   * Assignment rank field.
+   * Teaching rank field.
    */
   _rank: function() {
     var rank = this.props.hit._source.rank;
     return Number(rank).toLocaleString();
-  },
-
-
-  /**
-   * Get a green -> red color, based on percentile.
-   */
-  _color: function() {
-    var scale = chroma.scale(['red', 'green']).mode('lab');
-    var ratio = Number(this.props.hit._source.percent)/100;
-    return scale(ratio).hex()
   }
 
 

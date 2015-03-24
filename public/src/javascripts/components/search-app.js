@@ -18,18 +18,24 @@ module.exports = React.createClass({
   render: function() {
     return (
       <div className="container">
+        <div className="row">
 
-        <div className="page-header">
-          <h2>
-            <img src="/src/images/osp.jpg" />
-            <span>Open Syllabus Project</span>&nbsp;
-            <small>Harvard Open Metadata</small>
-          </h2>
+          <div className="search col-md-7">
+
+            <div className="page-header">
+              <h2>
+                <img src="/src/images/osp.jpg" />
+                <span>Open Syllabus Project</span>&nbsp;
+                <small>Harvard Open Metadata</small>
+              </h2>
+            </div>
+
+            <SearchBox />
+            <ResultList />
+
+          </div>
+
         </div>
-
-        <SearchBox />
-        <ResultList />
-
       </div>
     );
   }
