@@ -9,20 +9,17 @@ var chroma = require('chroma-js');
 module.exports = React.createClass({
 
 
-  mixins: [
-    Fluxxor.FluxMixin(React),
-    Fluxxor.StoreWatchMixin('OverviewStore')
-  ],
+  mixins: [Fluxxor.FluxMixin(React)],
 
 
   /**
    * Get the current hits.
    */
-  getStateFromFlux: function() {
-    return {
-      selected: this.getFlux().store('OverviewStore').selected
-    };
-  },
+  //getStateFromFlux: function() {
+    //return {
+      //selected: this.getFlux().store('OverviewStore').selected
+    //};
+  //},
 
 
   /**
@@ -30,21 +27,12 @@ module.exports = React.createClass({
    */
   render: function() {
 
-    // Is the row currently selected?
-    var id = this.props.hit._source.stored_id;
-    var selected = (this.state.selected == id);
-
-    var trCx = React.addons.classSet({
-      'text': true,
-      'success': selected
-    });
-
     var colorStyle = {
       color: this._color()
     };
 
     return (
-      <tr className={trCx} onClick={this.onClick}>
+      <tr className="text" onClick={this.onClick}>
 
         <td style={colorStyle} className="percentile">
           {this._percentile()}
@@ -83,12 +71,12 @@ module.exports = React.createClass({
   /**
    * When a text row is clicked.
    */
-  onClick: function() {
-    this.getFlux().actions.select(
-      this.props.hit._source.stored_id,
-      this.props.hit._source.title
-    );
-  },
+  //onClick: function() {
+    //this.getFlux().actions.select(
+      //this.props.hit._source.stored_id,
+      //this.props.hit._source.title
+    //);
+  //},
 
 
   /**
@@ -145,7 +133,7 @@ module.exports = React.createClass({
    * Assignment percentile field.
    */
   _percentile: function() {
-    var percentile = this.props.hit._source.percentile;
+    var percentile = this.props.hit._source.percent;
     return Number(percentile).toFixed(2)+'%';
   },
 
@@ -164,7 +152,7 @@ module.exports = React.createClass({
    */
   _color: function() {
     var scale = chroma.scale(['red', 'green']).mode('lab');
-    var ratio = Number(this.props.hit._source.percentile)/100;
+    var ratio = Number(this.props.hit._source.percent)/100;
     return scale(ratio).hex()
   }
 
