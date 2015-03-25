@@ -7,11 +7,6 @@ var React = require('react/addons');
 var Fluxxor = require('fluxxor');
 var ResultRow = require('./result-row');
 
-// TODO: Fix.
-window.jQuery = $;
-window._ = _;
-require('floatthead');
-
 
 module.exports = React.createClass({
 
@@ -29,15 +24,6 @@ module.exports = React.createClass({
     return {
       texts: this.getFlux().store('TextStore').texts
     };
-  },
-
-
-  /**
-   * Initialize the sticky header.
-   */
-  componentDidUpdate: function() {
-    var table = $(this.getDOMNode()).find('table');
-    table.floatThead();
   },
 
 
@@ -89,8 +75,8 @@ module.exports = React.createClass({
 
           <table className={tableCx}>
             <thead>
-              <th>Percentile</th>
               <th>Rank</th>
+              <th>Percentile</th>
               <th>Count</th>
               <th>Text</th>
             </thead>

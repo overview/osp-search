@@ -24,11 +24,12 @@ module.exports = React.createClass({
     return (
       <tr className="text" onClick={this.onClick}>
 
+        <td className="rank">{this._rank()}</td>
+
         <td style={colorStyle} className="percentile">
           {this._percentile()}
         </td>
 
-        <td className="rank">{this._rank()}</td>
         <td className="count">{this._count()}</td>
 
         <td className="text">
