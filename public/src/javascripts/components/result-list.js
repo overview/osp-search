@@ -92,7 +92,7 @@ module.exports = React.createClass({
               <th>Percentile</th>
               <th>Rank</th>
               <th>Count</th>
-              <th></th>
+              <th>Text</th>
             </thead>
             <tbody>
               {texts}
