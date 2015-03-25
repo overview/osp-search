@@ -12,10 +12,6 @@
     color: @brand-primary;
   }
 
-  thead {
-    background: white;
-  }
-
   th {
     font-size: 10px;
     text-transform: uppercase;
@@ -23,6 +19,11 @@
     &:last-child {
       text-align: left;
     }
+  }
+
+  td {
+    vertical-align: middle !important;
+    padding: 0 5px;
   }
 
   tr.text {
@@ -40,7 +41,8 @@
   }
 
   td.rank {
-    font-weight: bold;
+    font-weight: 300;
+    font-size: 2em;
   }
 
   td.text {
