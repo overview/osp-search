@@ -17,7 +17,7 @@
         image: '{{ ec2_image }}'
         instance_type: '{{ ec2_instance_type }}'
         vpc_subnet_id: '{{ ec2_subnet_id }}'
-        group: osp-ssl-es
+        group: '{{ ec2_group }}'
         region: '{{ ec2_region }}'
         assign_public_ip: yes
         keypair: '{{ ec2_keypair }}'
