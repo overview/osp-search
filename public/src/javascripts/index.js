@@ -13,5 +13,5 @@ var flux = new Fluxxor.Flux(stores, actions);
 
 React.render(
   <SearchApp flux={flux} />,
-  document.getElementById('search')
+  document.getElementById('osp-search')
 );

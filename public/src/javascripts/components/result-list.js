@@ -69,7 +69,7 @@ module.exports = React.createClass({
       });
 
       return (
-        <div className="results">
+        <div id="results">
 
           <h3>{total.toLocaleString()} results:</h3>
 
