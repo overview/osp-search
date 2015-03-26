@@ -13,13 +13,13 @@ exports.query = function(req, res) {
     host: 'localhost:9200' // TODO: envify.
   });
 
-  // If a query string is defined, search title and author.
+  // Search title / author / publisher, when query is defined.
   if (!_.isEmpty(req.query.qs)) {
     var query = {
       multi_match: {
         query: req.query.qs,
         fields: ['_all'],
-        type: 'best_fields'
+        type: 'phrase_prefix'
       }
     };
   }
