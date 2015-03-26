@@ -4,6 +4,7 @@ var Fluxxor = require('fluxxor');
 var React = require('react');
 var ResultList = require('./result-list');
 var SearchBox = require('./search-box');
+var Map = require('./map');
 
 
 module.exports = React.createClass({
@@ -33,6 +34,10 @@ module.exports = React.createClass({
             <SearchBox />
             <ResultList />
 
+          </div>
+
+          <div id="map" className="col-md-5">
+            <Map />
           </div>
 
         </div>
