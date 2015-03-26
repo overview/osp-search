@@ -24,7 +24,4 @@ module.exports = function(app) {
     app.use(require('connect-livereload')());
   }
 
-  // Allow cross-origin requests.
-  app.use(require('cors')());
-
 }
