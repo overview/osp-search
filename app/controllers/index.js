@@ -5,14 +5,6 @@ var es = require('elasticsearch');
 
 
 /**
- * Overview /metadata.
- */
-exports.metadata = function(req, res) {
-  res.status(204).send();
-};
-
-
-/**
  * Overview /show.
  */
 exports.show = function(req, res) {
@@ -34,7 +26,7 @@ exports.query = function(req, res) {
     var query = {
       multi_match: {
         query: req.query.qs,
-        fields: ['title', 'author', 'publisher'],
+        fields: ['_all'],
         type: 'best_fields'
       }
     };
