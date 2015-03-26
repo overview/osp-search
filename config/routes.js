@@ -1,9 +1,10 @@
 
 
-var index = require('../app/controllers/index');
+var search = require('../app/controllers/search');
+var api = require('../app/controllers/api');
 
 
 module.exports = function(app) {
-  app.get('/', index.show);
-  app.get('/query', index.query);
+  app.get('/', search.index);
+  app.get('/query', api.query);
 };
