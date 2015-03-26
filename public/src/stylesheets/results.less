@@ -2,8 +2,12 @@
 
 #results {
 
-  h3 {
+  h3.hit-count {
     color: @brand-primary;
+    margin-left: 10px;
+    span.count {
+      font-weight: bold;
+    }
   }
 
   em {
@@ -34,7 +38,7 @@
     font-weight: bold;
   }
 
-  td.percentile, td.rank, td.count {
+  td.rank, td.percent, td.count {
     width: 1%;
     text-align: center;
     font-size: 18px;

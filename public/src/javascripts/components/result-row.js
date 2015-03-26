@@ -26,7 +26,7 @@ module.exports = React.createClass({
 
         <td className="rank">{this._rank()}</td>
 
-        <td style={colorStyle} className="percentile">
+        <td style={colorStyle} className="percent">
           {this._percentile()}
         </td>
 
@@ -80,7 +80,7 @@ module.exports = React.createClass({
    * Get a green -> red color, based on percentile.
    */
   _color: function() {
-    var scale = chroma.scale(['red', 'green']).mode('lab');
+    var scale = chroma.scale(['#F04124', '#43ac6a']).mode('lab');
     var ratio = Number(this.props.hit._source.percent)/100;
     return scale(ratio).hex()
   },

@@ -71,7 +71,11 @@ module.exports = React.createClass({
       return (
         <div id="results">
 
-          <h3>{total.toLocaleString()} results:</h3>
+          <h3 className="hit-count">
+            <span className="count">
+              {total.toLocaleString()}
+            </span> results:
+          </h3>
 
           <table className={tableCx}>
             <thead>
