@@ -8,7 +8,9 @@ var es = require('elasticsearch');
  * Overview /show.
  */
 exports.show = function(req, res) {
-  res.render('overview/show');
+  res.render('overview/show', {
+    title: 'Harvard Open Metadata'
+  });
 };
 
 
