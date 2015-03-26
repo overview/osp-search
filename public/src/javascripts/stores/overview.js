@@ -43,10 +43,6 @@ module.exports = Fluxxor.createStore({
       }]
     };
 
-    window.parent.postMessage(
-      msg, this.params.server
-    );
-
     this.selected = opts.id;
     this.emit('change');
 

@@ -24,7 +24,7 @@ module.exports = React.createClass({
   render: function() {
     return (
       <input
-        className="form-control"
+        className="search form-control"
         type="text"
         placeholder="Search texts"
         onChange={this.onChange}
