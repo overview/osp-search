@@ -20,14 +20,10 @@ module.exports = {
   /**
    * When a text is selected.
    *
-   * @param {Number} id - The Overview id.
-   * @param {Number} title - The HLOM title.
+   * @param {Number} id - The Elasticsearch id.
    */
-  select: function(id, title) {
-    this.dispatch('SELECT', {
-      id: id,
-      title: title
-    });
+  select: function(id) {
+    this.dispatch('SELECT', id)
   }
 
 

@@ -9,7 +9,8 @@ module.exports = Fluxxor.createStore({
 
 
   actions: {
-    QUERY: 'onQuery'
+    QUERY: 'onQuery',
+    SELECT: 'onSelect'
   },
 
 
@@ -45,6 +46,17 @@ module.exports = Fluxxor.createStore({
       }
     });
 
+  },
+
+
+  /**
+   * Select a text.
+   *
+   * @param {String} id - The document _id.
+   */
+  onSelect: function(id) {
+    this.selected = id;
+    this.emit('change');
   }
 
 

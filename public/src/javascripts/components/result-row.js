@@ -9,7 +9,20 @@ var chroma = require('chroma-js');
 module.exports = React.createClass({
 
 
-  mixins: [Fluxxor.FluxMixin(React)],
+  mixins: [
+    Fluxxor.FluxMixin(React),
+    Fluxxor.StoreWatchMixin('TextStore')
+  ],
+
+
+  /**
+   * Get the current hits.
+   */
+  getStateFromFlux: function() {
+    return {
+      selected: this.getFlux().store('TextStore').selected
+    };
+  },
 
 
   /**
@@ -17,12 +30,17 @@ module.exports = React.createClass({
    */
   render: function() {
 
+    var trCx = React.addons.classSet({
+      'text': true,
+      'success': (this.state.selected == this.props.hit._id)
+    });
+
     var colorStyle = {
       color: this._color()
     };
 
     return (
-      <tr className="text" onClick={this.onClick}>
+      <tr className={trCx} onClick={this.onClick}>
 
         <td className="rank">{this._rank()}</td>
 
@@ -56,6 +74,14 @@ module.exports = React.createClass({
       </tr>
     );
 
+  },
+
+
+  /**
+   * When a text row is clicked.
+   */
+  onClick: function() {
+    this.getFlux().actions.select(this.props.hit._id);
   },
 
 
