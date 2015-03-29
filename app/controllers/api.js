@@ -5,7 +5,7 @@ var es = require('elasticsearch');
 
 
 /**
- * Run a search query.
+ * Query HLOM texts.
  */
 exports.texts = function(req, res) {
 
@@ -64,4 +64,12 @@ exports.texts = function(req, res) {
     res.send(result);
   });
 
+};
+
+
+/**
+ * Get institution counts.
+ */
+exports.counts = function(req, res) {
+  res.send([]);
 };
