@@ -2,10 +2,10 @@
 
 var _ = require('lodash');
 var $ = require('jquery');
-require('underscore.haz')(_);
 var React = require('react/addons');
 var Fluxxor = require('fluxxor');
 var ResultRow = require('./result-row');
+require('underscore.haz')(_);
 
 
 module.exports = React.createClass({

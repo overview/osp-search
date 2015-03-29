@@ -8,6 +8,27 @@ var React = require('react');
 module.exports = React.createClass({
 
 
+  mixins: [
+    Fluxxor.FluxMixin(React),
+    Fluxxor.StoreWatchMixin('InstitutionStore')
+  ],
+
+
+  /**
+   * Get institutions and counts.
+   */
+  getStateFromFlux: function() {
+
+    var store = this.getFlux().store('InstitutionStore');
+
+    return {
+      institutions: store.institutions,
+      counts: store.counts
+    };
+
+  },
+
+
   /**
    * Render the container.
    */
