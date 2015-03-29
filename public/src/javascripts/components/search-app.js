@@ -18,10 +18,10 @@ module.exports = React.createClass({
    */
   render: function() {
     return (
-      <div className="container-fluid" onClick={this.onClick}>
+      <div className="container-fluid">
         <div className="row">
 
-          <div id="search" className="region">
+          <div id="search" className="region" onClick={this.onClick}>
 
             <div className="media page-header">
 
