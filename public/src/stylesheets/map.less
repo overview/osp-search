@@ -1,15 +1,27 @@
 
 
-#leaflet {
-  height: inherit;
-}
+#map {
 
-.leaflet-popup-content-wrapper {
+  .leaflet-popup-content-wrapper {
 
-  border-radius: 2px;
+    border-radius: 2px;
 
-  h4, p {
-    margin: 6px 0;
+    h4, p {
+      margin: 6px 0;
+    }
+
   }
 
+  i.spinner {
+    position: absolute;
+    margin: 0;
+    z-index: 999;
+    top: 20px;
+    right: 20px;
+  }
+
+}
+
+#leaflet {
+  height: inherit;
 }

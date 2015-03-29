@@ -39,11 +39,25 @@ module.exports = React.createClass({
    */
   render: function() {
 
+    // Show markers when data is hydrated.
     if (this.state.institutions && this.state.counts) {
       this.renderMarkers();
     }
 
-    return <div id="leaflet"></div>;
+    var spinnerCx = React.addons.classSet({
+      'fa': true,
+      'fa-spin': true,
+      'fa-circle-o-notch': true,
+      'spinner': true,
+      'hide': this.state.counts
+    });
+
+    return (
+      <div id="map" className="region">
+        <div id="leaflet"></div>
+        <i className={spinnerCx}></i>
+      </div>
+    );
 
   },
 

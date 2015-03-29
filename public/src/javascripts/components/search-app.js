@@ -41,9 +41,7 @@ module.exports = React.createClass({
 
           </div>
 
-          <div id="map" className="region">
-            <Map />
-          </div>
+          <Map />
 
         </div>
       </div>

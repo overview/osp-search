@@ -19,6 +19,9 @@ module.exports = Fluxxor.createStore({
 
     var self = this;
 
+    this.institutions = null;
+    this.counts = null;
+
     // Load institutions.
     $.ajax({
       dataType: 'json',
@@ -42,6 +45,11 @@ module.exports = Fluxxor.createStore({
 
     var self = this;
 
+    // Show the spinner.
+    this.counts = null;
+    this.emit('change');
+
+    // Load new counts.
     $.ajax({
       dataType: 'json',
       url: '/api/counts',
