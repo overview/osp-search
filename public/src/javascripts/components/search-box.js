@@ -7,7 +7,18 @@ var React = require('react');
 module.exports = React.createClass({
 
 
-  mixins: [Fluxxor.FluxMixin(React)],
+  mixins: [
+    Fluxxor.FluxMixin(React),
+    React.addons.LinkedStateMixin
+  ],
+
+
+  /**
+   * By default, empty query.
+   */
+  getInitialState: function() {
+    return { query: null }
+  },
 
 
   /**
@@ -30,11 +41,14 @@ module.exports = React.createClass({
           className="search form-control"
           type="text"
           placeholder="Search texts"
-          onChange={this.onChange}
+          valueLink={this.linkState('query')}
+          onKeyPress={this.onKeyPress}
         />
 
         <span className="input-group-btn">
-          <button className="btn btn-default">Search</button>
+          <button
+            className="btn btn-default"
+            onClick={this.query}>Search</button>
         </span>
 
       </div>
@@ -44,18 +58,20 @@ module.exports = React.createClass({
 
 
   /**
-   * When the search query is changed.
+   * Search on "Enter" keypress.
    */
-  onChange: function(event) {
+  onKeyPress: function(event) {
+    if (event.key == 'Enter') {
+      this.query()
+    }
+  },
 
-    // If the box is empty, match all texts.
-    var query =
-      event.target.value ?
-      event.target.value :
-      null;
 
-    this.getFlux().actions.query(query);
-
+  /**
+   * Execute the current query.
+   */
+  query: function() {
+    this.getFlux().actions.query(this.state.query);
   }
 
 

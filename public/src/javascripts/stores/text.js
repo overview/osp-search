@@ -19,7 +19,7 @@ module.exports = Fluxxor.createStore({
    */
   initialize: function() {
 
-    this.texts = [];
+    this.texts = null;
 
     // Debounce the query handler.
     this.onQuery = _.debounce(this.onQuery, 200);
@@ -35,6 +35,10 @@ module.exports = Fluxxor.createStore({
   onQuery: function(opts) {
 
     var store = this;
+
+    // Show the spinner.
+    this.texts = null;
+    this.emit('change');
 
     $.ajax({
       dataType: 'json',

@@ -33,7 +33,7 @@ module.exports = React.createClass({
   render: function() {
 
     // Loading spinner.
-    if (_.isEmpty(this.state.texts)) {
+    if (_.isNull(this.state.texts)) {
 
       var spinnerCx = React.addons.classSet({
         'fa': true,
@@ -42,7 +42,7 @@ module.exports = React.createClass({
         'spinner': true
       });
 
-      return <i className={spinnerCx}></i>
+      return <i className={spinnerCx}></i>;
 
     }
 
@@ -51,7 +51,7 @@ module.exports = React.createClass({
 
     // No results.
     if (total == 0) {
-      return <h3>No results</h3>
+      return <h3>No results</h3>;
     }
 
     else {
