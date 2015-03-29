@@ -12,7 +12,7 @@ module.exports = React.createClass({
    * Render the container.
    */
   render: function() {
-    return <div id="map"></div>;
+    return <div id="leaflet"></div>;
   },
 
 

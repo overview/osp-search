@@ -18,10 +18,10 @@ module.exports = React.createClass({
    */
   render: function() {
     return (
-      <div className="container">
+      <div className="container-fluid">
         <div className="row">
 
-          <div className="search col-md-7">
+          <div id="search" className="region">
 
             <div className="page-header">
               <h2>
@@ -36,7 +36,7 @@ module.exports = React.createClass({
 
           </div>
 
-          <div id="map" className="col-md-5">
+          <div id="map" className="region">
             <Map />
           </div>
 
