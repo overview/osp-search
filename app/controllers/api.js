@@ -82,7 +82,9 @@ exports.institutions = function(req, res) {
     client.queryAsync(
       "SELECT "+
       "DISTINCT(di.institution_id) as id, "+
-      "i.metadata->'Institution_Name' as name, "+
+      "i.metadata->'Institution_Name' as institution, "+
+      "i.metadata->'Campus_Name' as campus, "+
+      "i.metadata->'Institution_Web_Address' as url, "+
       "i.metadata->'Longitude' as lon, "+
       "i.metadata->'Latitude' as lat "+
       "FROM document_institution as di "+

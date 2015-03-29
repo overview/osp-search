@@ -42,7 +42,7 @@
     "grunt-contrib-uglify": "^0.7.0",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-nodemon": "^0.4.0",
-    "jadeify": "^4.0.1",
+    "jadeify": "^4.1.0",
     "jit-grunt": "^0.9.1",
     "load-grunt-config": "^0.16.0",
     "reactify": "^1.0.0",

@@ -4,6 +4,7 @@ var _ = require('lodash');
 var L = require('leaflet');
 var Fluxxor = require('fluxxor');
 var React = require('react');
+var markerTpl = require('./marker.jade');
 
 require('leaflet.markercluster');
 require('leaflet.heat');
@@ -146,12 +147,20 @@ module.exports = React.createClass({
 
       // Create the marker.
       var marker = new L.Marker([inst.lat, inst.lon], {
-        name: inst.name,
+        name: inst.institution,
         count: count
+      });
+
+      // Create the popup.
+      var popup = markerTpl({
+        institution: inst.institution,
+        url: inst.url,
+        campus: inst.campus
       });
 
       // Show the marker.
       self.markers.addLayer(marker);
+      marker.bindPopup(popup);
 
       // Register the heatmap point.
       points.push(new L.latLng(inst.lat, inst.lon, count));
