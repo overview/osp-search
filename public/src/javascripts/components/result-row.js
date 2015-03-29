@@ -80,8 +80,9 @@ module.exports = React.createClass({
   /**
    * When a text row is clicked.
    */
-  onClick: function() {
+  onClick: function(event) {
     this.getFlux().actions.select(this.props.hit._id);
+    event.stopPropagation();
   },
 
 

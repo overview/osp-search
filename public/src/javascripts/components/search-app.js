@@ -18,7 +18,7 @@ module.exports = React.createClass({
    */
   render: function() {
     return (
-      <div className="container-fluid">
+      <div className="container-fluid" onClick={this.onClick}>
         <div className="row">
 
           <div id="search" className="region">
@@ -48,6 +48,14 @@ module.exports = React.createClass({
         </div>
       </div>
     );
+  },
+
+
+  /**
+   * Deselect on click.
+   */
+  onClick: function() {
+    this.getFlux().actions.select();
   }
 
 

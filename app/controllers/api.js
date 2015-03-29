@@ -120,53 +120,78 @@ exports.counts = function(req, res) {
   .connectAsync('postgres://localhost/osp')
   .spread(function(client, close) {
 
-    // Get the HLOM record id with the passed control number.
-    client.queryAsync(
-      'SELECT id FROM hlom_record WHERE control_number = $1',
-      [req.query.cn]
-    )
+    // Load counts for one text.
+    if (req.query.cn) {
 
-    // Get all HLOM citation rows for the record.
-    .then(function(result) {
-      return client.queryAsync(
-        'SELECT * FROM hlom_citation WHERE record_id = $1',
-        [result.rows[0].id]
-      );
-    })
+      // Get the HLOM record id with the passed control number.
+      client.queryAsync(
+        'SELECT id FROM hlom_record WHERE control_number = $1',
+        [req.query.cn]
+      )
 
-    // Try to find document -> institution rows for each doc.
-    .then(function(result) {
+      // Get all HLOM citation rows for the record.
+      .then(function(result) {
+        return client.queryAsync(
+          'SELECT * FROM hlom_citation WHERE record_id = $1',
+          [result.rows[0].id]
+        );
+      })
 
-      var docIds = _.map(result.rows, function(r) {
-        return r.document_id;
+      // Try to find document -> institution rows for each doc.
+      .then(function(result) {
+
+        var docIds = _.map(result.rows, function(r) {
+          return r.document_id;
+        });
+
+        return client.queryAsync(
+          'SELECT * FROM document_institution WHERE '+
+          'document_id = ANY($1::int[])',
+          [docIds]
+        );
+
+      })
+
+      // Build up a map of institution id -> count.
+      .then(function(result) {
+
+        var counts = {};
+        _.each(result.rows, function(r) {
+
+          if (_.has(counts, r.institution_id)) {
+            counts[r.institution_id] += 1;
+          } else {
+            counts[r.institution_id] = 1;
+          }
+
+        });
+
+        res.send(counts);
+        close();
+
       });
 
-      return client.queryAsync(
-        'SELECT * FROM document_institution WHERE '+
-        'document_id = ANY($1::int[])',
-        [docIds]
-      );
+    }
 
-    })
+    // Load counts for all texts.
+    else {
 
-    // Build up a map of institution id -> count.
-    .then(function(result) {
+      client.queryAsync(
+        "SELECT "+
+        "DISTINCT(institution_id) as id, "+
+        "COUNT(institution_id) as count "+
+        "FROM document_institution "+
+        "GROUP BY institution_id"
+      )
 
-      var counts = {};
-      _.each(result.rows, function(r) {
-
-        if (_.has(counts, r.institution_id)) {
-          counts[r.institution_id] += 1;
-        } else {
-          counts[r.institution_id] = 1;
-        }
-
+      .then(function(result) {
+        ids = _.pluck(result.rows, 'id');
+        cts = _.pluck(result.rows, 'count');
+        res.send(_.zipObject(ids, cts));
+        close();
       });
 
-      res.send(counts);
-      close();
-
-    });
+    }
 
   });
 

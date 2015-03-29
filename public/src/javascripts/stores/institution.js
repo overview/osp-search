@@ -26,6 +26,7 @@ module.exports = Fluxxor.createStore({
       success: function(res) {
         self.institutions = res;
         self.emit('change');
+        self.onSelect();
       }
     });
 

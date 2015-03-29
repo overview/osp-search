@@ -148,7 +148,7 @@ module.exports = React.createClass({
       // Create the marker.
       var marker = new L.Marker([inst.lat, inst.lon], {
         name: inst.institution,
-        count: count
+        count: Number(count)
       });
 
       // Create the popup.
