@@ -7,9 +7,11 @@
 
   vars_files:
     - vars/elasticsearch.yml
+    - vars/postgres.yml
 
   roles:
     - common
+    - postgres
     - elasticsearch
     - nginx
     - nodejs

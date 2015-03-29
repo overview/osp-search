@@ -77,7 +77,7 @@ exports.texts = function(req, res) {
 exports.institutions = function(req, res) {
 
   db
-  .connectAsync('postgres://localhost/osp')
+  .connectAsync('postgres://osp@localhost/osp')
   .spread(function(client, close) {
 
     client.queryAsync(
@@ -118,7 +118,7 @@ exports.institutions = function(req, res) {
 exports.counts = function(req, res) {
 
   db
-  .connectAsync('postgres://localhost/osp')
+  .connectAsync('postgres://osp@localhost/osp')
   .spread(function(client, close) {
 
     // Load counts for one text.
