@@ -92,8 +92,16 @@ exports.institutions = function(req, res) {
     )
 
     .then(function(result) {
-      res.send(result.rows);
+
+      // Map id -> institution.
+      var institutions = _(result.rows)
+        .pluck('id')
+        .zipObject(result.rows)
+        .value();
+
+      res.send(institutions);
       close();
+
     });
 
   });

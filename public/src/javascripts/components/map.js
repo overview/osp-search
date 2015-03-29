@@ -1,8 +1,12 @@
 
 
+var _ = require('lodash');
 var L = require('leaflet');
 var Fluxxor = require('fluxxor');
 var React = require('react');
+
+require('leaflet.markercluster');
+require('leaflet.heat');
 
 
 module.exports = React.createClass({
@@ -33,7 +37,13 @@ module.exports = React.createClass({
    * Render the container.
    */
   render: function() {
+
+    if (this.state.institutions && this.state.counts) {
+      this.renderMarkers();
+    }
+
     return <div id="leaflet"></div>;
+
   },
 
 
@@ -42,6 +52,8 @@ module.exports = React.createClass({
    */
   componentDidMount: function() {
     this._initLeaflet();
+    this._initMarkers();
+    this._initHeatmap();
   },
 
 
@@ -59,7 +71,97 @@ module.exports = React.createClass({
     // TODO: Where to focus?
     this.map.setView([40.73, -73.93], 6)
 
-  }
+  },
+
+
+  /**
+   * Initialize the marker cluster group.
+   */
+  _initMarkers: function() {
+
+    this.markers = new L.MarkerClusterGroup({
+
+      iconCreateFunction: function(cluster) {
+
+        var children = cluster.getAllChildMarkers();
+
+        // Add the counts of all the children.
+        count = _.reduce(children, function(s, m) {
+          return s + m.options.count;
+        }, 0);
+
+        // Form the class.
+        var c = 'marker-cluster-';
+        if (count < 10) {
+          c += 'small';
+        } else if (count < 100) {
+          c += 'medium';
+        } else {
+          c += 'large';
+        }
+
+        return new L.DivIcon({
+          html: '<div><span>'+count+'</span></div>',
+          iconSize: new L.Point(40, 40),
+          className: 'marker-cluster '+c
+        });
+
+      }
+
+    });
+
+    this.map.addLayer(this.markers);
+
+  },
+
+
+  /**
+   * Initialize the heatmap.
+   */
+  _initHeatmap: function() {
+
+    this.heatmap = L.heatLayer([], {
+      minOpacity: 0.15
+    });
+
+    this.map.addLayer(this.heatmap);
+
+  },
+
+
+  /**
+   * Render the marker clusters.
+   */
+  renderMarkers: function() {
+
+    var self = this;
+
+    this.markers.clearLayers();
+    var points = [];
+
+    _.each(this.state.counts, function(count, id) {
+
+      var inst = self.state.institutions[id];
+      if (!inst) return;
+
+      // Create the marker.
+      var marker = new L.Marker([inst.lat, inst.lon], {
+        name: inst.name,
+        count: count
+      });
+
+      // Show the marker.
+      self.markers.addLayer(marker);
+
+      // Register the heatmap point.
+      points.push(new L.latLng(inst.lat, inst.lon, count));
+
+    });
+
+    // Show the heatmap.
+    this.heatmap.setLatLngs(points);
+
+  },
 
 
 });

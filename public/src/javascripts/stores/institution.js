@@ -19,9 +19,6 @@ module.exports = Fluxxor.createStore({
 
     var self = this;
 
-    this.institutions = [];
-    this.counts = [];
-
     // Load institutions.
     $.ajax({
       dataType: 'json',
