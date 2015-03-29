@@ -45,6 +45,9 @@ module.exports = Fluxxor.createStore({
 
     var self = this;
 
+    // Don't reload the same counts.
+    if (cn == this.cn && this.counts) return;
+
     // Show the spinner.
     this.counts = null;
     this.emit('change');
@@ -59,6 +62,8 @@ module.exports = Fluxxor.createStore({
         self.emit('change');
       }
     });
+
+    this.cn = cn;
 
   }
 
