@@ -2,6 +2,9 @@
 
 var _ = require('lodash');
 var es = require('elasticsearch');
+var pg = require('pg').native;
+var Promise = require('bluebird');
+var db = Promise.promisifyAll(pg);
 
 
 /**
@@ -71,5 +74,58 @@ exports.texts = function(req, res) {
  * Get institution counts.
  */
 exports.counts = function(req, res) {
-  res.send([]);
+
+  db
+  .connectAsync('postgres://localhost/osp')
+  .spread(function(client, close) {
+
+    // Get the HLOM record id with the passed control number.
+    client.queryAsync(
+      'SELECT id FROM hlom_record WHERE control_number = $1',
+      [req.query.cn]
+    )
+
+    // Get all HLOM citation rows for the record.
+    .then(function(result) {
+      return client.queryAsync(
+        'SELECT * FROM hlom_citation WHERE record_id = $1',
+        [result.rows[0].id]
+      );
+    })
+
+    // Try to find document -> institution rows for each doc.
+    .then(function(result) {
+
+      var docIds = _.map(result.rows, function(r) {
+        return r.document_id;
+      });
+
+      return client.queryAsync(
+        'SELECT * FROM document_institution WHERE '+
+        'document_id = ANY($1::int[])',
+        [docIds]
+      );
+
+    })
+
+    // Build up a map of institution id -> count.
+    .then(function(result) {
+
+      var counts = {};
+      _.each(result.rows, function(r) {
+
+        if (_.has(counts, r.institution_id)) {
+          counts[r.institution_id] += 1;
+        } else {
+          counts[r.institution_id] = 1;
+        }
+
+      });
+
+      res.send(counts);
+
+    });
+
+  });
+
 };

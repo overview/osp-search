@@ -5,6 +5,7 @@
   "author": "David McClure <davidwilliammcclure@gmail.com>",
   "license": "ISC",
   "dependencies": {
+    "bluebird": "^2.9.18",
     "bootstrap": "^3.3.2",
     "chroma-js": "^0.6.3",
     "coffee-script": "^1.9.0",
@@ -19,6 +20,8 @@
     "leaflet": "^0.7.3",
     "lesshat": "^3.0.2",
     "lodash": "^3.2.0",
+    "pg": "^4.3.0",
+    "pg-native": "^1.8.0",
     "querystring": "^0.2.0",
     "react": "^0.12.2",
     "serve-favicon": "^2.2.0",
