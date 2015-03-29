@@ -1,5 +1,6 @@
 
 
+var _ = require('lodash');
 var Fluxxor = require('fluxxor');
 var React = require('react');
 
@@ -43,6 +44,7 @@ module.exports = React.createClass({
           placeholder="Search texts"
           valueLink={this.linkState('query')}
           onKeyPress={this.onKeyPress}
+          onKeyUp={this.onKeyUp}
         />
 
         <span className="input-group-btn">
@@ -58,7 +60,7 @@ module.exports = React.createClass({
 
 
   /**
-   * Search on "Enter" keypress.
+   * Search when "Enter" is pressed.
    */
   onKeyPress: function(event) {
     if (event.key == 'Enter') {
@@ -68,7 +70,17 @@ module.exports = React.createClass({
 
 
   /**
-   * Execute the current query.
+   * Search when the input is cleared.
+   */
+  onKeyUp: function() {
+    if (_.isEmpty(this.state.query)) {
+      this.query();
+    }
+  },
+
+
+  /**
+   * Run the current query.
    */
   query: function() {
     this.getFlux().actions.query(this.state.query);
