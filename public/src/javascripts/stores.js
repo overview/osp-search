@@ -1,8 +1,10 @@
 
 
-var TextStore = require('./stores/texts');
+var TextStore = require('./stores/text');
+var InstitutionStore = require('./stores/institution');
 
 
 module.exports = {
-  TextStore: new TextStore()
+  TextStore: new TextStore(),
+  InstitutionStore: new InstitutionStore()
 };
