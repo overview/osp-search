@@ -71,6 +71,37 @@ exports.texts = function(req, res) {
 
 
 /**
+ * Get institution with documents.
+ */
+exports.institutions = function(req, res) {
+
+  db
+  .connectAsync('postgres://localhost/osp')
+  .spread(function(client, close) {
+
+    client.queryAsync(
+      "SELECT "+
+      "DISTINCT(di.institution_id) as id, "+
+      "i.metadata->'Institution_Name' as name, "+
+      "i.metadata->'Longitude' as lon, "+
+      "i.metadata->'Latitude' as lat "+
+      "FROM document_institution as di "+
+      "LEFT JOIN institution as i "+
+      "ON di.institution_id = i.id "+
+      "WHERE i.metadata ? 'Latitude'"
+    )
+
+    .then(function(result) {
+      res.send(result.rows);
+      close();
+    });
+
+  });
+
+};
+
+
+/**
  * Get institution counts.
  */
 exports.counts = function(req, res) {
@@ -123,6 +154,7 @@ exports.counts = function(req, res) {
       });
 
       res.send(counts);
+      close();
 
     });
 

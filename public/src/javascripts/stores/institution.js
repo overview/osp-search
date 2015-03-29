@@ -1,5 +1,6 @@
 
 
+var $ = require('jquery');
 var Fluxxor = require('fluxxor');
 
 
@@ -17,7 +18,16 @@ module.exports = Fluxxor.createStore({
    * @param {String} cn - The HLOM control number.
    */
   onSelect: function(cn) {
-    console.log(cn);
+
+    $.ajax({
+      dataType: 'json',
+      url: '/api/counts',
+      data: { cn: cn },
+      success: function(res) {
+        console.log(res);
+      }
+    });
+
   }
 
 
