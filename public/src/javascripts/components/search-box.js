@@ -23,12 +23,22 @@ module.exports = React.createClass({
    */
   render: function() {
     return (
-      <input
-        className="search form-control"
-        type="text"
-        placeholder="Search texts"
-        onChange={this.onChange}
-      />
+
+      <div className="input-group">
+
+        <input
+          className="search form-control"
+          type="text"
+          placeholder="Search texts"
+          onChange={this.onChange}
+        />
+
+        <span className="input-group-btn">
+          <button className="btn btn-default">Search</button>
+        </span>
+
+      </div>
+
     );
   },
 
