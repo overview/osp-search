@@ -42,7 +42,7 @@ module.exports = Fluxxor.createStore({
 
     $.ajax({
       dataType: 'json',
-      url: '/query',
+      url: '/api/texts',
       data: opts,
       success: function(res) {
         store.texts = res.hits;

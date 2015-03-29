@@ -6,5 +6,5 @@ var api = require('../app/controllers/api');
 
 module.exports = function(app) {
   app.get('/', search.index);
-  app.get('/query', api.query);
+  app.get('/api/texts', api.texts);
 };

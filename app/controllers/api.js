@@ -7,7 +7,7 @@ var es = require('elasticsearch');
 /**
  * Run a search query.
  */
-exports.query = function(req, res) {
+exports.texts = function(req, res) {
 
   var client = new es.Client({
     host: 'localhost:9200' // TODO: envify.
