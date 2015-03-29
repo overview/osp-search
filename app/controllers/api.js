@@ -2,9 +2,9 @@
 
 var _ = require('lodash');
 var es = require('elasticsearch');
-var pg = require('pg').native;
-var Promise = require('bluebird');
 var cache = require('memory-cache');
+var pg = require('pg');
+var Promise = require('bluebird');
 var db = Promise.promisifyAll(pg);
 
 
