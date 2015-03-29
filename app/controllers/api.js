@@ -4,6 +4,7 @@ var _ = require('lodash');
 var es = require('elasticsearch');
 var pg = require('pg').native;
 var Promise = require('bluebird');
+var cache = require('memory-cache');
 var db = Promise.promisifyAll(pg);
 
 
@@ -176,20 +177,36 @@ exports.counts = function(req, res) {
     // Load counts for all texts.
     else {
 
-      client.queryAsync(
-        "SELECT "+
-        "DISTINCT(institution_id) as id, "+
-        "COUNT(institution_id) as count "+
-        "FROM document_institution "+
-        "GROUP BY institution_id"
-      )
+      // Try to hit the cache.
+      var cached = cache.get('all-counts');
+      if (cached) res.send(cached);
 
-      .then(function(result) {
-        ids = _.pluck(result.rows, 'id');
-        cts = _.pluck(result.rows, 'count');
-        res.send(_.zipObject(ids, cts));
-        close();
-      });
+      else {
+
+        client.queryAsync(
+          "SELECT "+
+          "DISTINCT(institution_id) as id, "+
+          "COUNT(institution_id) as count "+
+          "FROM document_institution "+
+          "GROUP BY institution_id"
+        )
+
+        .then(function(result) {
+
+          // Build the counts.
+          var ids = _.pluck(result.rows, 'id');
+          var cts = _.pluck(result.rows, 'count');
+          var counts = _.zipObject(ids, cts);
+          res.send(_.zipObject(ids, cts));
+
+          // Cache the response.
+          cache.put('all-counts', counts);
+
+        });
+
+      }
+
+      close();
 
     }
 
