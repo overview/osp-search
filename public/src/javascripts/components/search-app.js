@@ -23,12 +23,17 @@ module.exports = React.createClass({
 
           <div id="search" className="region">
 
-            <div className="page-header">
-              <h2>
+            <div className="media page-header">
+
+              <div className="media-left">
                 <img src="/src/images/osp.jpg" />
-                <span>Open Syllabus Project</span>&nbsp;
-                <small>Harvard Open Metadata</small>
-              </h2>
+              </div>
+
+              <div className="media-body">
+                <h2 className="media-heading">Open Syllabus Project</h2>
+                <small>Harvard Library Open Metadata</small>
+              </div>
+
             </div>
 
             <SearchBox />
