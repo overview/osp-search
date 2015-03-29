@@ -14,17 +14,43 @@ module.exports = Fluxxor.createStore({
 
   /**
    * Filter institutions by text.
+   */
+  initialize: function() {
+
+    var self = this;
+
+    this.institutions = [];
+    this.counts = [];
+
+    // Load institutions.
+    $.ajax({
+      dataType: 'json',
+      url: '/api/institutions',
+      success: function(res) {
+        self.institutions = res;
+        self.emit('change');
+      }
+    });
+
+  },
+
+
+  /**
+   * Filter institutions by text.
    *
    * @param {String} cn - The HLOM control number.
    */
   onSelect: function(cn) {
+
+    var self = this;
 
     $.ajax({
       dataType: 'json',
       url: '/api/counts',
       data: { cn: cn },
       success: function(res) {
-        console.log(res);
+        self.counts = res;
+        self.emit('change');
       }
     });
 
