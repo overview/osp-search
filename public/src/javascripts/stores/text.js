@@ -56,10 +56,10 @@ module.exports = Fluxxor.createStore({
   /**
    * Select a text.
    *
-   * @param {String} id - The document _id.
+   * @param {String} cn - The HLOM control number.
    */
-  onSelect: function(id) {
-    this.selected = id;
+  onSelect: function(cn) {
+    this.selected = cn;
     this.emit('change');
   }
 

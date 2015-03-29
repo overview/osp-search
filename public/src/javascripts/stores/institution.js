@@ -14,10 +14,10 @@ module.exports = Fluxxor.createStore({
   /**
    * Filter institutions by text.
    *
-   * @param {String} id - The HLOM control number.
+   * @param {String} cn - The HLOM control number.
    */
-  onSelect: function(id) {
-    console.log(id);
+  onSelect: function(cn) {
+    console.log(cn);
   }
 
 

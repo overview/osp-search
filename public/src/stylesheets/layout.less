@@ -14,10 +14,15 @@ body {
 }
 
 #search {
+
   float: left;
   border-top: 6px solid @color-osp;
   width: 45%;
   padding: 0 2em;
+
+  // Fix Chrome painting bug.
+  .backface-visibility(hidden);
+
 }
 
 #map {
