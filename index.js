@@ -1,6 +1,5 @@
 
 
-require('coffee-script/register');
 var app = require('./server');
 var debug = require('debug')('osp');
 
