@@ -7,7 +7,7 @@ var express = require('express');
 
 module.exports = function(app) {
 
-  var root = path.normalize(__dirname+'/..');
+  var root = path.normalize(__dirname+'/../..');
   var env = process.env.NODE_ENV || 'development';
 
   // Assign the port.

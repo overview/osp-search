@@ -1,5 +1,6 @@
 
 
+var config = require('config');
 var _ = require('lodash');
 var es = require('elasticsearch');
 var cache = require('memory-cache');
@@ -13,9 +14,9 @@ var db = Promise.promisifyAll(pg);
  */
 exports.texts = function(req, res) {
 
-  var client = new es.Client({
-    host: 'localhost:9200' // TODO: envify.
-  });
+  var client = new es.Client(
+    _.clone(config.elasticsearch)
+  );
 
   // Search title / author / publisher, when query is defined.
   if (!_.isEmpty(req.query.qs)) {
@@ -77,7 +78,7 @@ exports.texts = function(req, res) {
 exports.institutions = function(req, res) {
 
   db
-  .connectAsync('postgres://osp@localhost/osp')
+  .connectAsync(config.postgres)
   .spread(function(client, close) {
 
     client.queryAsync(
@@ -118,7 +119,7 @@ exports.institutions = function(req, res) {
 exports.counts = function(req, res) {
 
   db
-  .connectAsync('postgres://osp@localhost/osp')
+  .connectAsync(config.postgres)
   .spread(function(client, close) {
 
     // Load counts for one text.

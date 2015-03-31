@@ -1,7 +1,7 @@
 
 
-var search = require('../app/controllers/search');
-var api = require('../app/controllers/api');
+var search = require('../controllers/search');
+var api = require('../controllers/api');
 
 
 module.exports = function(app) {
