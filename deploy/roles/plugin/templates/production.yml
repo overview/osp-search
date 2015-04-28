@@ -1,0 +1,5 @@
+
+postgres:
+  user: {{ pg_user }}
+  password: {{ pg_pass }}
+  database: {{ pg_db }}

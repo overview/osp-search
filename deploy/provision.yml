@@ -26,9 +26,10 @@
         exact_count: 1
         instance_tags:
           Name: osp-search
-          osp: search
+          Environment: osp-search
+          osp: search-debug
         count_tag:
-          osp: search
+          osp: search-debug
 
     - name: Attach the OSP volume
       ec2_vol:

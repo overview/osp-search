@@ -83,7 +83,6 @@ module.exports = React.createClass({
   onClick: function(event) {
     this.getFlux().actions.select(this.props.hit._id);
     event.stopPropagation();
-    console.log(this.props.hit._id);
   },
 
 

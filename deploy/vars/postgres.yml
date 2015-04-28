@@ -2,12 +2,11 @@
 
 postgresql_version: 9.4
 postgresql_data_directory: /osp/data/postgresql
-postgresql_ext_install_contrib: yes
 postgresql_client_encoding: utf8
+postgresql_ext_install_contrib: yes
 
 postgresql_databases:
   - name: '{{ pg_db }}'
-    hstore: yes
 
 postgresql_users:
   - name: '{{ pg_user }}'
