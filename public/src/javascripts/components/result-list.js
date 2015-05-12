@@ -80,9 +80,14 @@ module.exports = React.createClass({
           <table className={tableCx}>
             <thead>
               <th>Rank</th>
-              <th>Percentile</th>
               <th>Count</th>
               <th>Text</th>
+              <th>Linear Rank %</th>
+              <th>Log Rank %</th>
+              <th>Linear Count %</th>
+              <th>Log Count %</th>
+              <th>Log Rank 1-10</th>
+              <th>Log Rank 1-5</th>
             </thead>
             <tbody>
               {texts}

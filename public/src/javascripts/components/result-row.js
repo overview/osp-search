@@ -35,18 +35,29 @@ module.exports = React.createClass({
       'success': (this.state.selected == this.props.hit._id)
     });
 
-    var colorStyle = {
-      color: this._color()
+    var linRankPctColor = {
+      color: this._color(this.props.hit._source.lin_rank_pct, 100)
+    };
+    var logRankPctColor = {
+      color: this._color(this.props.hit._source.log_rank_pct, 100)
+    };
+    var linCountPctColor = {
+      color: this._color(this.props.hit._source.lin_count_pct, 100)
+    };
+    var logCountPctColor = {
+      color: this._color(this.props.hit._source.log_count_pct, 100)
+    };
+    var logRank10Color = {
+      color: this._color(this.props.hit._source.log_rank_10, 10)
+    };
+    var logRank5Color = {
+      color: this._color(this.props.hit._source.log_rank_5, 5)
     };
 
     return (
       <tr className={trCx} onClick={this.onClick}>
 
         <td className="rank">{this._rank()}</td>
-
-        <td style={colorStyle} className="percent">
-          {this._percentile()}
-        </td>
 
         <td className="count">{this._count()}</td>
 
@@ -69,6 +80,30 @@ module.exports = React.createClass({
             </div>
 
           </div>
+        </td>
+
+        <td className="lin-rank-pct" style={linRankPctColor}>
+          {this.props.hit._source.lin_rank_pct}
+        </td>
+
+        <td className="log-rank-pct" style={logRankPctColor}>
+          {this.props.hit._source.log_rank_pct}
+        </td>
+
+        <td className="lin-count-pct" style={linCountPctColor}>
+          {this.props.hit._source.lin_count_pct}
+        </td>
+
+        <td className="log-count-pct" style={logCountPctColor}>
+          {this.props.hit._source.log_count_pct}
+        </td>
+
+        <td className="log-rank-10" style={logRank10Color}>
+          {this.props.hit._source.log_rank_10}
+        </td>
+
+        <td className="log-rank-5" style={logRank5Color}>
+          {this.props.hit._source.log_rank_5}
         </td>
 
       </tr>
@@ -106,10 +141,9 @@ module.exports = React.createClass({
   /**
    * Get a green -> red color, based on percentile.
    */
-  _color: function() {
+  _color: function(val, max) {
     var scale = chroma.scale(['#F04124', '#43ac6a']).mode('lab');
-    var ratio = Number(this.props.hit._source.percent)/100;
-    return scale(ratio).hex()
+    return scale(val/max).hex()
   },
 
 
