@@ -25,11 +25,11 @@
 
         exact_count: 1
         instance_tags:
-          Name: osp-search
-          Environment: osp-search
-          osp: search-debug
+          Name: osp-ranks
+          Environment: osp-ranks
+          osp: ranks
         count_tag:
-          osp: search-debug
+          osp: ranks
 
     - name: Attach the OSP volume
       ec2_vol:

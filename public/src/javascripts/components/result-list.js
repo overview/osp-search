@@ -87,7 +87,9 @@ module.exports = React.createClass({
               <th>Linear Count %</th>
               <th>Log Count %</th>
               <th>Log Rank 1-10</th>
+              <th>Log Count 1-10</th>
               <th>Log Rank 1-5</th>
+              <th>Log Count 1-5</th>
             </thead>
             <tbody>
               {texts}

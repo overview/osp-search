@@ -18,7 +18,7 @@ module.exports = React.createClass({
    */
   render: function() {
     return (
-      <div className="container-fluid">
+      <div className="container">
         <div className="row">
 
           <div id="search" className="region" onClick={this.onClick}>
@@ -40,8 +40,6 @@ module.exports = React.createClass({
             <ResultList />
 
           </div>
-
-          <Map />
 
         </div>
       </div>

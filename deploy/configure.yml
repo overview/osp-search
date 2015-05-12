@@ -3,7 +3,7 @@
 - name: Configure the server
   sudo: yes
   hosts:
-    - tag_osp_search
+    - tag_osp_ranks
 
   vars_files:
     - vars/elasticsearch.yml

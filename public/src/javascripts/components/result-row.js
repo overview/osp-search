@@ -53,6 +53,12 @@ module.exports = React.createClass({
     var logRank5Color = {
       color: this._color(this.props.hit._source.log_rank_5, 5)
     };
+    var logCount10Color = {
+      color: this._color(this.props.hit._source.log_count_10, 10)
+    };
+    var logCount5Color = {
+      color: this._color(this.props.hit._source.log_count_5, 5)
+    };
 
     return (
       <tr className={trCx} onClick={this.onClick}>
@@ -83,27 +89,35 @@ module.exports = React.createClass({
         </td>
 
         <td className="lin-rank-pct" style={linRankPctColor}>
-          {this.props.hit._source.lin_rank_pct}
+          {this._pct(this.props.hit._source.lin_rank_pct)}
         </td>
 
         <td className="log-rank-pct" style={logRankPctColor}>
-          {this.props.hit._source.log_rank_pct}
+          {this._pct(this.props.hit._source.log_rank_pct)}
         </td>
 
         <td className="lin-count-pct" style={linCountPctColor}>
-          {this.props.hit._source.lin_count_pct}
+          {this._pct(this.props.hit._source.lin_count_pct)}
         </td>
 
         <td className="log-count-pct" style={logCountPctColor}>
-          {this.props.hit._source.log_count_pct}
+          {this._pct(this.props.hit._source.log_count_pct)}
         </td>
 
         <td className="log-rank-10" style={logRank10Color}>
-          {this.props.hit._source.log_rank_10}
+          {this._star(this.props.hit._source.log_rank_10)}
+        </td>
+
+        <td className="log-count-10" style={logCount10Color}>
+          {this._star(this.props.hit._source.log_count_10)}
         </td>
 
         <td className="log-rank-5" style={logRank5Color}>
-          {this.props.hit._source.log_rank_5}
+          {this._star(this.props.hit._source.log_rank_5)}
+        </td>
+
+        <td className="log-count-5" style={logCount5Color}>
+          {this._star(this.props.hit._source.log_count_5)}
         </td>
 
       </tr>
@@ -181,21 +195,28 @@ module.exports = React.createClass({
 
 
   /**
-   * Teaching percentile field.
-   */
-  _percentile: function() {
-    var percentile = this.props.hit._source.percent;
-    return Number(percentile).toFixed(2)+'%';
-  },
-
-
-  /**
    * Teaching rank field.
    */
   _rank: function() {
     var rank = this.props.hit._source.rank;
     return Number(rank).toLocaleString();
-  }
+  },
+
+
+  /**
+   * Teaching percentile field.
+   */
+  _pct: function(pct) {
+    return Number(pct).toFixed(2)+'%';
+  },
+
+
+  /**
+   * Teaching percentile field.
+   */
+  _star: function(val) {
+    return Number(val).toFixed(1);
+  },
 
 
 });
