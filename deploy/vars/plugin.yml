@@ -1,0 +1,4 @@
+---
+
+plugin_branch: ranks
+plugin_src: /home/{{ ansible_ssh_user }}/osp-ranks
