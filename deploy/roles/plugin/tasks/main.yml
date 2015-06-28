@@ -6,6 +6,11 @@
     repo: '{{ plugin_repo }}'
     dest: '{{ plugin_src }}'
 
+- name: Apply environment config
+  template:
+    src: production.yml.j2
+    dest: '{{ plugin_src }}/config/production.yml'
+
 - name: NPM install
   command: npm install
   when: code.changed
